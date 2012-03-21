@@ -1,0 +1,8 @@
+citHeader("To cite package 'Rmalschains' in publications use:")
+
+citEntry(entry="Manual",
+	title = "Continuous Optimization using Memetic Algorithms with Local Search Chains (MA-LS-Chains) in R",
+	author = "Christoph Bergmeir, Daniel Molina, Jos\\'e M. Ben\\'itez",
+	year = 2012,
+	note = "R package version 0.1",
+	textVersion = "Christoph Bergmeir, Daniel Molina, Jose M. Benitez (2012). Continuous Optimization using Memetic Algorithms with Local Search Chains (MA-LS-Chains) in R.")
