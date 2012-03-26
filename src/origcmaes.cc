@@ -2206,7 +2206,7 @@ random_init( random_t *t, long unsigned inseed)
   if (inseed < 1) {
     while ((long) (cloc - clock()) == 0)
       ; /* TODO: remove this for time critical applications? */
-    inseed = (long)abs(100*time(NULL)+clock());
+    inseed = (long unsigned) abs( (long int) (100*time(NULL)+clock()));
   }
 
   return random_Start(t, inseed);
@@ -2568,7 +2568,7 @@ readpara_SupplementDefaults(readpara_t *t)
   if (t->seed < 1) {
     while ((int) (cloc - clock()) == 0)
       ; /* TODO: remove this for time critical applications!? */
-    t->seed = (unsigned int)abs(100*time(NULL)+clock());
+    t->seed = (unsigned int) abs( (long int) (100*time(NULL)+clock()) );
   }
 
   if (t->stStopFitness.flg == -1)

@@ -1,5 +1,5 @@
-7306e0439218e99ae1faaae3a939ac20 *ChangeLog
-cfb13c4317d539428fa9cdaf8441c9dc *DESCRIPTION
+a38148dcc30e4365c78dea783f582347 *ChangeLog
+b97344382586f1498d744f1a5fbe7fb4 *DESCRIPTION
 551f3e9015ab83572aba177e13c53aeb *LICENSE
 13e87200bc07d0aa52d4358e43220e71 *NAMESPACE
 1a0f23ca295cac90e26c25ea04ceae29 *R/Rmalschains-package.R
@@ -27,7 +27,7 @@ ad11e7c3883714cb554e2db2826dfea2 *src/cholesky.cpp
 4d306752b5edbff18231ac0a9147012f *src/cmaes.cc
 762a49c04ef63c86361a53b697a710f1 *src/cmaes.h
 5f879050f0bb9f0928514c60b1a080f8 *src/cmaes_interface.h
-98fde678bdd623b6935cac0e597681fe *src/cmaesb.cc
+6f19f49de9a4d2e8097490b02e401b33 *src/cmaesb.cc
 daa96ed286efae89112a417d151c5f8d *src/cmaesb.h
 72d811a5782714cf4a8bb8b9e0fb410f *src/cmaeshan.cc
 945a4c6c89d5c1334cd3cd53de73ac20 *src/cmaeshan.h
@@ -68,7 +68,7 @@ ed0a7ea000ad5dd61b5539cc06cbb5e4 *src/individual.cc
 ba7883c5201ea42110e3e981b4e72575 *src/initind.cc
 e1c474a1e396d52c8d4e95c633b72fad *src/initind.h
 3db28b7f4ff8ef84c28a2b643d2aefcd *src/jacobi.cpp
-224c20225d071290529533d9d7459f15 *src/jade.cc
+363c91d53bd94992202a1471c776f010 *src/jade.cc
 2be5294b6a8b8a586072bd9a9d65bc30 *src/jade.h
 4cdc8e2e101d2a447144585ea81ae552 *src/jdebin.cc
 69a0711cd81bb83d9734d1e0a8e4af28 *src/jdebin.h
@@ -120,7 +120,7 @@ e213ebe08e7a01efbe5a4747108d3dd2 *src/newutil.h
 eea005c9abd5bcdda30f91ff87a6df84 *src/nm_misc.cpp
 2631924838feca1191f66fc6c7076a7e *src/orandom.cc
 654aee31e87aaac7c28150bbaddc26e1 *src/orandom.h
-6ba34d73ff269db6e3171ca55c98c9d7 *src/origcmaes.cc
+379b1c22dcaf4ec2e89f5bf6650d42fd *src/origcmaes.cc
 384a92b5c2472851644ade30e3689962 *src/origcmaes.h
 4d7684f8d1a83ca5098e48bc1e05629e *src/popobserver.h
 6c50472382093c8db901b80164edd945 *src/populationchc.cc
@@ -165,13 +165,13 @@ ccabe402d6c493c4c01fbdccb3cc596c *src/running.h
 4cbb949d97c4af5fb7985893a01a56bd *src/selectlsimp.h
 959bbbde23d2e7729699ed7956611f0b *src/signal.cc
 c59aaddbe4d647ba7da9ddab7dce190e *src/signal.h
-d7bfc37d1c13aef9fb0a22a333925377 *src/simplex.cc
+1640cb0300a7f36db751880e33ede2cb *src/simplex.cc
 1cb8249b9af612cb5a03cf03ecc20ecf *src/simplex.h
-d7b7992336566d39539501c77fcfca66 *src/solis.cc
+0d085f26fcf3ce657fa800438e37ce7a *src/solis.cc
 b9ba2aa3779a46673d3d886baaf7d703 *src/solis.h
-91028cd1c1aee1424ca69726ff85600e *src/solisn.cc
+f683c0805d1e6b0ccdcf9e1a93e6981d *src/solisn.cc
 06a987ed5419fdabe3d287cd73b8f4e0 *src/solisn.h
-79156b0028bb2d9ead5e9a6e9d727a1a *src/solisn2.cc
+ec746f4b3c7e791517007dac9f719f71 *src/solisn2.cc
 ad1984806d239401b065567367f43d51 *src/solisn2.h
 e1e4e323cad89f01db9a73f447d580e5 *src/sort.cpp
 9b4c6bfe2691ab4b14049b62be698e3e *src/srandom.cc

@@ -200,7 +200,7 @@ void CMAESBound::evalSols(ColumnVector &xmean, MyMatrix &arx, MyMatrix &arxvalid
     if  (v_ti.size() ) { // any coordinate of xmean out of bounds
        // judge distance of xmean to boundary
        tx = xmean - tx;
-       Real umbral_out = 3*max(1.0,sqrt(m_ndim)/m_mueff);
+       Real umbral_out = 3*max(1.0,sqrt((double) m_ndim)/m_mueff);
        Real increm = pow(1.1, max(1.0, m_mueff/10.0/m_ndim));
        vector<int>::iterator item;
        int posi;

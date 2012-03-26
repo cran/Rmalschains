@@ -12,11 +12,11 @@ Description: This package implements an algorithm family for continuous
         (MA-LS-Chains). Memetic algorithms are hybridizations of
         genetic algorithms with local search methods. They are
         especially suited for continuous optimization.
-Version: 0.1
-Date: 2012-03-21
+Version: 0.1-2
+Date: 2012-03-26
 Depends: Rcpp (>= 0.9.4)
 Encoding: UTF-8
 Collate: 'malschains.R' 'Rmalschains-package.R'
-Packaged: 2012-03-21 11:50:04 UTC; bergmeir
+Packaged: 2012-03-26 12:51:25 UTC; bergmeir
 Repository: CRAN
-Date/Publication: 2012-03-21 12:52:47
+Date/Publication: 2012-03-26 13:46:09

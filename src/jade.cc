@@ -184,7 +184,7 @@ void JADE::cross(PopulationReal *pop, unsigned pos, tChromosomeReal &crom) {
     int nDim;
     int popsize = pop->size();
     int archivesize = m_archive.size();
-    unsigned bestsToConsider = round(popsize*p);
+    unsigned bestsToConsider = floor(popsize*p + 0.5); //round(popsize*p);
     
     vector<unsigned> pbests = pop->getBests(bestsToConsider);
 

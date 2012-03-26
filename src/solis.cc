@@ -20,6 +20,7 @@
 #include "solis.h"
 #include "distance.h"
 #include "random.h"
+#include <functional> 
 #include <algorithm>
 #include <cassert>
 #include <cmath>

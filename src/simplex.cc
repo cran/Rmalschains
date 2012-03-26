@@ -19,6 +19,7 @@
 #include "simplex.h"
 #include "distance.h"
 #include "random.h"
+#include <functional>
 #include <algorithm>
 #include <numeric>
 #include <cassert>
