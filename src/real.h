@@ -37,10 +37,9 @@ typedef tReal tGen;
 
 
 #ifndef _TFITNESS
-typedef long double tFitness;
+typedef double tFitness;
 #define _TFITNESS 1
 #endif 
-
 
 namespace realea {
 

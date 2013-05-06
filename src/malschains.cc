@@ -233,7 +233,7 @@ void MALSChains::setDif(bool debug, string ident, unsigned id, tFitness oldfit, 
    if (debug) {
 
       if (oldfit!= newfit) {
-	 print_debug("%s[%2d]:\t%Le -> %Le  %Le\n", ident.c_str(), id, oldfit, newfit, fabs(newfit-oldfit));
+     print_debug("%s[%2d]:\t%e -> %e  %e\n", ident.c_str(), id, oldfit, newfit, fabs(newfit-oldfit));
       }
 //      else {
 //	 print_info("%s[%2d]:\t%Le\n", ident.c_str(), id, newfit);

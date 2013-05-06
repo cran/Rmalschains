@@ -31,14 +31,14 @@ void SRandom::setSeed(unsigned long seed) {
 
 SRandom::SRandom(unsigned long seed) {
     setSeed(seed);
+
+    iff=0;
+    idum = m_seed;
 }
 
 double  SRandom::rand(void) {
  	int j;
- 	static long ir[98],iy;// idum = 13171191;
-	static long idum = m_seed;
- 	static int iff=0;
- 
+
  	if (idum < 0 || iff == 0 || changed == 1) {
  		iff=1;
  		if ((idum=(IC-(idum)) % M) < 0) idum = -(idum);

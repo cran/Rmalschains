@@ -39,17 +39,24 @@
 #' scales well with the dimensionality of the data. It applies the Solis Wets solver to randomly chosen subgroups of 
 #' variables (Subgrouping Solis Wets).
 #' 
+#' All the local search methods can also be used directly, without making use of the evolutionary algorithm. 
+#' 
 #' The package contains some demos illustrating its use. To get a list of them, type:
 #' 
 #' \code{library(Rmalschains)}
 #' 
 #' \code{demo()}
 #' 
-#' The demos currently available are \code{claw}, \code{rastrigin}, \code{sphere}, and \code{rastrigin_highDim}. So in order to, 
+#' The demos currently available are \code{claw}, \code{rastrigin}, \code{sphere}, \code{rastrigin_highDim}, and \code{rastrigin_inline}. So in order to, 
 #' e.g., execute the \code{claw} demo, type
 #' 
 #' \code{demo(claw)}
-#' 
+#'
+#' All algorithms are implemented in C++, and they run pretty fast. A usual processing to speed up optimization is to implement the objective function also in C/C++.
+#' However, a bottleneck in this approach is that the function needs to be passed as an R function, so that the optimizer needs to go back from C++ to R to C/C++ in each call 
+#' of the target function. The package provides an interface which allows to pass the C/C++ target function directly as a pointer. See the \code{rastrigin_inline} 
+#' demo for how to do that. The demo also shows how an environment can in this approach be used to pass additional parameters to the target function. 
+#'  
 #' For theoretical background of the algorithm, the reader may refer to the cited literature, where the algorithms where originally proposed.
 #' 
 #' @title Getting started with the Rmalschains package
@@ -105,17 +112,29 @@
 #'   return(y)
 #' }
 #' 
+#' #use MA-CMA-Chains
 #' res.claw <- malschains(function(x) {-claw(x)}, lower=c(-3), upper=c(3), 
 #'                        maxEvals=50000, control=malschains.control(popsize=50, 
 #'                        istep=300, ls="cmaes", optimum=-5))
 #' 
+#' #use only the CMA-ES local search               
+#' res.claw2 <- malschains(function(x) {-claw(x)}, lower=c(-3), upper=c(3), trace=FALSE,
+#'                        maxEvals=50000, control=malschains.control(ls="cmaes", 
+#'                            lsOnly=TRUE, optimum=-5))
+#' 
+#' #use only the Simplex local search               
+#' res.claw3 <- malschains(function(x) {-claw(x)}, lower=c(-3), upper=c(3), trace=FALSE,
+#'                        maxEvals=50000, control=malschains.control(ls="simplex", 
+#'                            lsOnly=TRUE, optimum=-5))
+#'                     
 #' x <- seq(-3, 3,length=1000)
 #' claw_x <- NULL
 #' for (i in 1:length(x)) claw_x[i] <- claw(x[i])
 #' 
 #' plot(x,claw_x, type="l")
 #' points(res.claw$sol, -res.claw$fitness, col="red")
-#' 
+#' points(res.claw2$sol, pch=3, -res.claw2$fitness, col="blue")
+#' points(res.claw3$sol, pch=3, -res.claw3$fitness, col="green")
 #'
 #' ##############################################
 #' #Example for the rastrigin function

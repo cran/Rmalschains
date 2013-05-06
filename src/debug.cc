@@ -130,7 +130,7 @@ void print_convergence(const tGen *sol, int dim, tFitness fitness) {
           print_output("%d %.30Lf\n", countFitness, fitness);
        }
        else {
-          fprintf(fconvergence,"%d %.30Lf\n", countFitness, fitness);
+          fprintf(fconvergence,"%d %.30f\n", countFitness, fitness);
           fflush(fconvergence);
        }
     }   

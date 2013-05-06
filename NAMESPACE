@@ -1,3 +1,3 @@
 export(malschains.control)
 export(malschains)
-useDynLib(Rmalschains, .registration=TRUE)
+useDynLib(Rmalschains,.registration=TRUE)

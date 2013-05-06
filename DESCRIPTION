@@ -1,6 +1,6 @@
 Package: Rmalschains
 Maintainer: Christoph Bergmeir <c.bergmeir@decsai.ugr.es>
-License: GPL-3
+License: GPL-3 | file LICENSE
 Title: Continuous Optimization using Memetic Algorithms with Local
         Search Chains (MA-LS-Chains) in R
 LinkingTo: Rcpp
@@ -12,11 +12,13 @@ Description: This package implements an algorithm family for continuous
         (MA-LS-Chains). Memetic algorithms are hybridizations of
         genetic algorithms with local search methods. They are
         especially suited for continuous optimization.
-Version: 0.1-2
-Date: 2012-03-26
-Depends: Rcpp (>= 0.9.4)
+Version: 0.2
+Date: 2013-05-06
+Depends: Rcpp (>= 0.9.10)
+Suggests: inline
 Encoding: UTF-8
 Collate: 'malschains.R' 'Rmalschains-package.R'
-Packaged: 2012-03-26 12:51:25 UTC; bergmeir
+Packaged: 2013-05-06 04:29:47 UTC; bergmeir
+NeedsCompilation: yes
 Repository: CRAN
-Date/Publication: 2012-03-26 13:46:09
+Date/Publication: 2013-05-06 07:25:58

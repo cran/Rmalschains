@@ -1,3 +1,12 @@
+02/05/2013 version 0.2: 
+
+- the local searches are directly accessible
+- the external pointer calling mechanism now uses an environment
+- seed in cmaes can now be fixed
+- depend on Rcpp 0.9.10
+- roxygen2 is used
+- trace=FALSE now really mutes the algorithm
+
 26/03/2012 version 0.1-2: fixes for Mac OSX and Solaris.
 
 26/03/2012 version 0.1-1: fixes for Mac OSX and Solaris. (not fully fixing the problems)

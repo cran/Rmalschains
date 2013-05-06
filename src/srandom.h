@@ -63,6 +63,12 @@ public:
 private:
 	unsigned long m_seed; /*< seed */
 	int changed; /*< Store if setValue is applied */
+	long idum;
+        int iff;
+
+        long ir[98];
+        long iy;// idum = 13171191;
+
 
 };
 

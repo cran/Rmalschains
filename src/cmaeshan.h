@@ -22,7 +22,6 @@
 #define _CMAESHANSEN_H 1
 
 #include "ilocalsearch.h"
-#include "newutil.h"
 
 namespace realea {
 

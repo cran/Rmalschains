@@ -33,22 +33,25 @@
 	    }
 	};
 
-	typedef double (*funcPtr)(SEXP);
+	typedef double (*funcPtr)(SEXP, SEXP);
 	class EvalCompiled : public EvalBase {
 	public:
-	    EvalCompiled( Rcpp::XPtr<funcPtr> xptr ) {
+		EvalCompiled( Rcpp::XPtr<funcPtr> xptr, SEXP env_ ) {
 		funptr = *(xptr);
+		env = env_;
 	    };
-	    EvalCompiled( SEXP xps ) {
+		EvalCompiled( SEXP xps, SEXP env_ ) {
 		Rcpp::XPtr<funcPtr> xptr(xps);
 		funptr = *(xptr);
+		env = env_;
 	    };
 	    double eval(SEXP par) {
 		neval++;
-		return funptr(par);
+		return funptr(par, env);
 	    }
 	private:
 	    funcPtr funptr;
+	    SEXP env;
 	};
 
 #endif

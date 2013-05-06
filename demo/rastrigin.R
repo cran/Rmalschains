@@ -17,7 +17,7 @@ rastrigin <- function(x) {
 res.rastrigin1 <- malschains(rastrigin, lower=seq(-1.0, -1.0, length=30), upper=seq(1.0, 1.0, length=30), maxEvals=50000, 
     control=malschains.control(effort=0.8, alpha=0.3, popsize=20, istep=100, ls="simplex"))
 
-
+# We supply an initialpop of one individual. The other ones will be initialized randomly
 res.rastrigin2 <- malschains(rastrigin, lower=seq(-1.0, -1.0, length=30), upper=seq(1.0, 1.0, length=30), maxEvals=50000, 
     initialpop = seq(0.1, 0.1, length=30), control=malschains.control(popsize=50, istep=300, ls="cmaes"))
 

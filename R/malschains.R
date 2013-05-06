@@ -17,8 +17,9 @@
 #' @param alpha The alpha parameter from crossover BLX-alpha. A lower value (< 0.3) reduces diversity, a higher value increases diversity.
 #' @param optimum The optimum to achieve. The default is zero, as in many minimization problems a value of zero can be considered optimal. 
 # @param threshold A threshold which defines how far away from the optimum the solution will still be treated as optimal.
-#' @param threshold A threshold which defines for the local search how much improvement is considered as no improvement. If this value is chosen 
+#' @param threshold A threshold which defines for the local search how much improvement is considered as no improvement. If this value is chosen
 #' too low (zero), then the local search will usually always try to improve on the best individual, even if it is already located very close to a local optimum. 
+#' @param lsOnly Apply only the local search algorithm, and not MA-LS-Chains
 #' @references 
 #' 
 #' Molina, D., Lozano, M., Sánchez, A.M., Herrera, F.
@@ -30,7 +31,7 @@
 #' (2010) Evolutionary Computation, 18 (1), pp. 27-63.
 #' 
 #' @export
-malschains.control <- function(popsize=50, ls="cmaes", istep=500, effort=0.5, alpha=0.5, optimum=0, threshold=1e-8) {
+malschains.control <- function(popsize=50, ls="cmaes", istep=500, effort=0.5, alpha=0.5, optimum=0, threshold=1e-8, lsOnly=FALSE) {
   
   if(popsize %% 10 != 0) {
     warning("Only population sizes divisible by 10 are supported. Using rounded value: ", popsize)
@@ -38,7 +39,7 @@ malschains.control <- function(popsize=50, ls="cmaes", istep=500, effort=0.5, al
   }
   if(popsize == 0) popsize <- 10
   
-  list(popsize=popsize, ls=ls, istep=istep, effort=effort, alpha=alpha, optimum=optimum, threshold=threshold)
+  list(popsize=popsize, ls=ls, istep=istep, effort=effort, alpha=alpha, optimum=optimum, threshold=threshold, lsOnly=lsOnly)
 }
 
 
@@ -77,7 +78,7 @@ malschains.control <- function(popsize=50, ls="cmaes", istep=500, effort=0.5, al
 #' (2010) Evolutionary Computation, 18 (1), pp. 27-63.
 #' 
 #' @export
-malschains <- function(fn, lower, upper, dim, maxEvals, trace=TRUE, initialpop = NULL, control=malschains.control(), seed=12345679, env) {
+malschains <- function(fn, lower, upper, dim, maxEvals, trace=TRUE, initialpop = NULL, control=malschains.control(), seed=NULL, env) {
   
   dimv = length(lower)
   stopifnot(length(lower)==length(upper))
@@ -97,8 +98,9 @@ malschains <- function(fn, lower, upper, dim, maxEvals, trace=TRUE, initialpop =
   alpha <- as.numeric(control$alpha)
   threshold <- as.numeric(control$threshold)
   optimum <- as.numeric(control$optimum)
-
-  # @param minimize boolean (TRUE indicates that is should minimize, FALSE in other case)
+  lsOnly <- control$lsOnly
+  
+  # @param minimize boolean (TRUE indicates that it should minimize, FALSE in other case)
   minimize <- TRUE
   
   if(!is.null(initialpop)) {
@@ -108,18 +110,17 @@ malschains <- function(fn, lower, upper, dim, maxEvals, trace=TRUE, initialpop =
   
   if(missing(env)) env <- new.env()
   
-  if(maxEvals < istep) {
+  if((maxEvals < istep) & !lsOnly) {
     warning("maxEvals cannot be smaller that istep, setting to istep") 
     maxEvals <- istep
   }
   
-  # print(paste("popsize: ", popsize))
-  # print(paste("relMaxEval: ", relMaxEval))
-  # print(paste("Local Search Method: ", arg_ls))
-  # print(paste("debugMA: ", debugMA))
-  # print(paste("effort: ", effort))
+  #use the cmaes version which respects the seed
+  if (control$ls == "cmaes") control$ls <- "cmaesmyrandom"
+  if(is.null(seed)) seed <- 1e8*runif(1)
   
-  .Call( "RmalschainsWrapper", fn, dim, lower, upper, env, control$popsize, maxEvals, control$ls, trace, istep, effort, 
-      alpha, optimum, threshold, minimize, initialpop, seed, PACKAGE = "Rmalschains" )
+  res <- .Call( "RmalschainsWrapper", fn, dim, lower, upper, env, control$popsize, maxEvals, control$ls, trace, istep, effort, 
+        alpha, optimum, threshold, minimize, initialpop, seed, lsOnly, PACKAGE = "Rmalschains" )    
   
+  res  
 }
