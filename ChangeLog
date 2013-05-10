@@ -1,3 +1,8 @@
+10/05/2013 version 0.2-1:
+
+- disabled restarting because it may yield to a result of 0 fitness and causes R to crash in Windows x64
+- added a comment for the original cmaes code in the LICENSE file
+
 02/05/2013 version 0.2: 
 
 - the local searches are directly accessible

@@ -1,6 +1,6 @@
-b593250db63e6a01db203397ca9d9ebb *ChangeLog
-8bc97e5d5dfb7267f931e1b1b7b36b2f *DESCRIPTION
-551f3e9015ab83572aba177e13c53aeb *LICENSE
+3387b4dc93e472a835aa0477c0c3d6fc *ChangeLog
+0bfaaf2b855c006a1a09f67c7060641b *DESCRIPTION
+da2d092bcef8a05ed9d7c4b066a44c31 *LICENSE
 e8a28730223604c3b1cd32fdc4f51374 *NAMESPACE
 4df2618c24e8cc46d6a6e3199e0ad209 *R/Rmalschains-package.R
 2a2c39fe52079df558d0b23ff99a22ec *R/malschains.R
@@ -19,7 +19,7 @@ ce0842a224840a9422c8910dce7f52af *man/malschains.control.Rd
 1beb611ae51271c8c7cfecc858b35c5f *src/Makevars
 49d22ad3345180f74748b6cae902ab66 *src/Makevars.win
 2e114a91070428e990f5c16a52450305 *src/RmalschainsEvaluate.h
-e659279d459522034f350213a091dcab *src/RmalschainsWrapper.cpp
+2763e5b9ad59d9c2013b684b6dc06782 *src/RmalschainsWrapper.cpp
 5760d3fd1a6a75c08657efc7d32e5306 *src/bandmat.cpp
 7373634f8719d74e06426e53dae81dfd *src/chc.cc
 da3a4faf3d068f92caab40e54cbddac9 *src/chc.h
@@ -38,7 +38,7 @@ cab88548241c99f3dd0f3f8b4766afc6 *src/cross.cc
 87c7382464c4653daaa13799331ee4ef *src/cross.h
 3107d18ef8d5d4db3d04f70483c146d3 *src/de.cc
 63c13ebd41e62ff6ddf8b59861344812 *src/de.h
-dc3884acb58dd517c88a1d81d3fa63e4 *src/debug.cc
+035a41744ee4a6f26c41888a9c47cb50 *src/debug.cc
 7a1aa86267aac8c9c53f48c8cd9f1b42 *src/debug.h
 40e6cf5cbb852fbf8e423cb7334827e7 *src/define.h
 bf722fca9e367b813581cf9b7d8d4350 *src/distance.cc

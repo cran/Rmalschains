@@ -146,7 +146,10 @@ RcppExport SEXP RmalschainsWrapper(SEXP p_fcall, SEXP p_dim, SEXP p_lower, SEXP 
 			ma->setDebug();
 		}
 
-		ma->setRestart(new RestartBest());
+		//There is a bug in cmaes, this line: fbestever = cmaes_Get(&params->evo, "fbestever"); 
+		//sets fbestever to zero and the local search returns a fitness of zero.
+		//ma->setRestart(new RestartBest());
+		ma->setRestart(NULL);
 		hybrid = ma;
 		hybrid->setEffortRatio(effort);
 
