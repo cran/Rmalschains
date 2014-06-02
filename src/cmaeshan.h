@@ -75,6 +75,9 @@ class CMAESHansen : public ILocalSearch {
          */
         void setParentsSize(int mu);
 
+        int getPopsize();
+        int getParentsSize();
+
 	unsigned apply(ILSParameters *opt, tChromosomeReal &sol, tFitness &fitness, unsigned itera);
 	ILSParameters *getInitOptions(tChromosomeReal &sol);
 

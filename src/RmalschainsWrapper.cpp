@@ -46,7 +46,7 @@ tFitness rFitnessFunc(const tGen *x, int n) {
 RcppExport SEXP RmalschainsWrapper(SEXP p_fcall, SEXP p_dim, SEXP p_lower, SEXP p_upper,
 		SEXP p_rho, SEXP p_popsize, SEXP p_maxEval, SEXP p_argls,
 		SEXP p_debugMA, SEXP p_istep, SEXP p_effort, SEXP p_alpha, SEXP p_targetValue, SEXP p_threshold, 
-		SEXP p_optMin, SEXP p_initialpop, SEXP p_seed, SEXP p_lsOnly) {
+		SEXP p_optMin, SEXP p_initialpop, SEXP p_seed, SEXP p_lsOnly, SEXP p_lsParam1, SEXP p_lsParam2) {
 
 	BEGIN_RCPP;
 
@@ -58,16 +58,20 @@ RcppExport SEXP RmalschainsWrapper(SEXP p_fcall, SEXP p_dim, SEXP p_lower, SEXP 
 	Rcpp::NumericVector upper(p_upper);
 	Rcpp::NumericVector lower(p_lower);
 
-	bool debugMA = Rcpp::as<bool>(p_debugMA);
+	unsigned int debugMA = Rcpp::as<unsigned int>(p_debugMA);
 
-	if(debugMA) {
+	if(debugMA == 0) {
+		disable_print_info();
+		disable_print_debug();
+
+	} else if (debugMA == 1) {
+		disable_print_info();
+		enable_print_debug();
+
+        } else {
 		enable_print_info();
 		enable_print_debug();
 		set_InitVerbose();
-	}
-	else {
-		disable_print_info();
-		disable_print_debug();
 	}
 
 	double effort = Rcpp::as<double>(p_effort);
@@ -120,6 +124,16 @@ RcppExport SEXP RmalschainsWrapper(SEXP p_fcall, SEXP p_dim, SEXP p_lower, SEXP 
 
 	ILocalSearch *ls = get_LS(arg_ls, domain, &random);
 
+        //
+
+  if (dynamic_cast<CMAESHansen*>(ls) != NULL)
+  {
+        int lambda = Rcpp::as<int>(p_lsParam1);
+        int mu = Rcpp::as<int>(p_lsParam2);
+        ((CMAESHansen*) ls)->setPopsize(lambda);
+        ((CMAESHansen*) ls)->setParentsSize(mu);
+  }
+
 	PopulationReal *pop;
 	MALSChains *ma = NULL;
 	SSGA *ssga = NULL;
@@ -153,7 +167,7 @@ RcppExport SEXP RmalschainsWrapper(SEXP p_fcall, SEXP p_dim, SEXP p_lower, SEXP 
 		hybrid = ma;
 		hybrid->setEffortRatio(effort);
 
-		//Rprintf("RatioLS: %f\nIstep: %d\n", effort, istep);
+		print_debug("RatioLS: %f\nIstep: %d\n", effort, istep);
 
 		std::stringstream effortStr;
 		effortStr << effort;
@@ -166,14 +180,14 @@ RcppExport SEXP RmalschainsWrapper(SEXP p_fcall, SEXP p_dim, SEXP p_lower, SEXP 
 		set_MaxEval(hybrid, maxEvalStr.str());
 
 		if (popsize > 0) {
-			//Rprintf("Popsize: %u\n", popsize);
+			print_debug("Popsize: %u\n", popsize);
 			hybrid->setPopsize(popsize);
 		}
 
 		//EA alg(hybrid, prob);
 		alg = new EA(hybrid, prob);
 
-		//Rprintf("sol%Le\n", sol[0]);
+		//print_debug("sol%Le\n", sol[0]);
 
 		ma->init();
 
@@ -193,7 +207,7 @@ RcppExport SEXP RmalschainsWrapper(SEXP p_fcall, SEXP p_dim, SEXP p_lower, SEXP 
 
 			//PopulationReal *pop = ma->getPop();
 
-			for(int s=0; s < initialpop.nrow() && s < popsize; s++) {
+			for(int s=0; s < initialpop.nrow() && s < (int) popsize; s++) {
 
 				tChromosomeReal ind(dim);
 
@@ -219,6 +233,13 @@ RcppExport SEXP RmalschainsWrapper(SEXP p_fcall, SEXP p_dim, SEXP p_lower, SEXP 
 		}
 	}
 
+//        Running* running;
+        unsigned nevalea = 0, nevalls = 0;
+	int num_improvement_ea=0, num_improvement_ls=0;
+	int num_total_ea=0, num_total_ls=0;
+	tFitness improvement_alg=0, improvement_ls=0;
+	double time_ms_alg=0, time_ms_ls=0, time_ms_ma=0;
+
 	if(lsOnly) {
 
 		//run the local search
@@ -235,26 +256,62 @@ RcppExport SEXP RmalschainsWrapper(SEXP p_fcall, SEXP p_dim, SEXP p_lower, SEXP 
 		ILSParameters *params = ls->getInitOptions(sol);
 
 		tFitness fitness_old = 0;
-		unsigned eval = 0;
 
 		//run the local search in steps of 100 and break if no more improvement is present
-		while(eval < maxEval) {
+		while(nevalls < maxEval) {
 
 			ls->apply(params, sol, fitness, 100);
 
 			if(abs(fitness - fitness_old) < threshold) break;
 
-			eval += 100;
+			nevalls += 100;
 			fitness_old = fitness;
 		}
 	} else {
 
 		ma->realApply(sol, fitness);
+
+                //running = ma->getRunning();
+
+                nevalea = ma->getNumEvalEA();
+                nevalls = ma->getNumEvalLS();
+
+
+                num_improvement_ea = ma->getNumImprovementEA();
+                num_improvement_ls = ma->getNumImprovementLS();
+                num_total_ea = ma->getNumTotalEA();
+                num_total_ls = ma->getNumTotalLS();
+                improvement_alg = ma->getImprovementEA();
+                improvement_ls = ma->getImprovementLS();
+                time_ms_alg = ma->getTimeMsEA();
+                time_ms_ls = ma->getTimeMsLS();
+                time_ms_ma = ma->getTimeMsMA();
+
 	}
 
-	//Rprintf("%Le\n", fitness);
+  if (dynamic_cast<CMAESHansen*>(ls) != NULL)
+  {
+        print_debug("CMAES::Popsize/Lambda: %d\n", ((CMAESHansen*) ls)->getPopsize());
+        print_debug("CMAES::ParentsSize/Mu: %d\n", ((CMAESHansen*) ls)->getParentsSize());
+  }
 
-	return Rcpp::List::create(Rcpp::Named("fitness") = fitness, Rcpp::Named("sol") = sol);
+	//print_debug("%Le\n", fitness);
+
+        //unsigned int neval = running->numEval();
+
+	return Rcpp::List::create(Rcpp::Named("numEvalEA") = nevalea, 
+                                  Rcpp::Named("numEvalLS") = nevalls,
+                                  Rcpp::Named("numImprovementEA") = num_improvement_ea,
+                                  Rcpp::Named("numImprovementLS") = num_improvement_ls,
+                                  Rcpp::Named("numTotalEA") = num_total_ea,
+                                  Rcpp::Named("numTotalLS") = num_total_ls,
+                                  Rcpp::Named("improvementEA") = improvement_alg,
+                                  Rcpp::Named("improvementLS") = improvement_ls,
+                                  Rcpp::Named("timeMsEA") = time_ms_alg,
+                                  Rcpp::Named("timeMsLS") = time_ms_ls,
+                                  Rcpp::Named("timeMsMA") = time_ms_ma,
+                                  Rcpp::Named("fitness") = fitness, 
+                                  Rcpp::Named("sol") = sol);
 
 	//To suppress the initialized but not used compiler warning
 	(void)alg;

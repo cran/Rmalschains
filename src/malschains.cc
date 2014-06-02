@@ -155,6 +155,51 @@ RunningPtr MALSChains::getRunning(void) {
     return m_alg->getRunning();
 }
 
+unsigned MALSChains::getNumEvalEA(void) {
+    return m_nevalalg;
+}
+
+unsigned MALSChains::getNumEvalLS(void) {
+    return m_nevalls;
+}
+
+int MALSChains::getNumImprovementEA(void) {
+    return m_num_improvement_ea;
+}
+
+int MALSChains::getNumImprovementLS(void) {
+    return m_num_improvement_ls;
+}
+
+int MALSChains::getNumTotalEA(void) {
+    return m_num_total_ea;
+}
+
+int MALSChains::getNumTotalLS(void) {
+    return m_num_total_ls;
+}
+
+tFitness MALSChains::getImprovementEA(void) {
+    return m_improvement_alg;
+}
+
+tFitness MALSChains::getImprovementLS(void) {
+    return m_improvement_ls;
+}
+
+double MALSChains::getTimeMsEA(void) {
+    return m_time_ms_alg;
+}
+
+double MALSChains::getTimeMsLS(void) {
+    return m_time_ms_ls;
+}
+
+double MALSChains::getTimeMsMA(void) {
+    return m_time_ms_ma;
+}
+
+
 void MALSChains::setRunning(Running *running) {
     ProxyEA::setRunning(running);
     unsigned frec = calculateFrec(m_nevalalg, m_nevalls, m_intensity, m_effort);
@@ -233,7 +278,7 @@ void MALSChains::setDif(bool debug, string ident, unsigned id, tFitness oldfit, 
    if (debug) {
 
       if (oldfit!= newfit) {
-     print_debug("%s[%2d]:\t%e -> %e  %e\n", ident.c_str(), id, oldfit, newfit, fabs(newfit-oldfit));
+     print_info("%s[%2d]:\t%e -> %e  %e\n", ident.c_str(), id, oldfit, newfit, fabs(newfit-oldfit));
       }
 //      else {
 //	 print_info("%s[%2d]:\t%Le\n", ident.c_str(), id, newfit);
@@ -318,22 +363,22 @@ void printPopFitness(double *fitnessold, double *fitness, unsigned num) {
 //    }
 
 #ifdef _DEBUG_POP   
-    print_debug("EA::PopFitness:  ");
+    print_info("EA::PopFitness:  ");
 
     for (unsigned i=0; i < num; i++) {
-	print_debug(" %e ", fitness[i]);
+	print_info(" %e ", fitness[i]);
     }
 
-    print_debug("\n");
+    print_info("\n");
 
 
-    print_debug("EA::Improvement: ");
+    print_info("EA::Improvement: ");
 
     for (unsigned i=0; i < num; i++) {
-	print_debug(" %e ", fabs(fitnessold[i]-fitness[i]));
+	print_info(" %e ", fabs(fitnessold[i]-fitness[i]));
     }
 
-    print_debug("\n");
+    print_info("\n");
 #endif
 }
 
@@ -348,20 +393,17 @@ unsigned MALSChains::realApply(tChromosomeReal &bestsol, tFitness &bestfitness) 
     clock_t clock_begin, m_time_ma_begin;
     bool hasImprovedByEA,hasImprovedByLS;
     unsigned restarts=0;
-    int num_improvement_ea, num_improvement_ls;
-    int num_total_ea, num_total_ls;
     
     PopulationReal *pop_alg = m_alg->getPop();
     deque<tIndividualReal*> ind_to_improve;
-    tFitness improvement_alg, improvement_ls;
 
     m_time_ls = m_time_alg = m_time_ma = 0;
-    num_improvement_ea = num_improvement_ls = 0;
-    num_total_ea = num_total_ls = 0;
+    m_num_improvement_ea = m_num_improvement_ls = 0;
+    m_num_total_ea = m_num_total_ls = 0;
 
     sol=bestsol;
     fitness = bestfitness;
-    improvement_alg = improvement_ls = 0;
+    m_improvement_alg = m_improvement_ls = 0;
 
     unsigned initMax = m_running->numEval();
     fitness_alg = pop_alg->getInd(pop_alg->getBest())->perf();
@@ -388,7 +430,7 @@ unsigned MALSChains::realApply(tChromosomeReal &bestsol, tFitness &bestfitness) 
 	}
 
 	m_time_alg += clock()-clock_begin;
-	improvement_alg += fabs(fitness_alg-old_fitness);
+	m_improvement_alg += fabs(fitness_alg-old_fitness);
         tFitness new_secondfitness = pop_alg->getSecondBestFitness();
 	hasImprovedByEA = hasImprovedEnough(old_secondfitness, new_secondfitness);
 	assert(new_secondfitness <= old_secondfitness);
@@ -404,9 +446,9 @@ unsigned MALSChains::realApply(tChromosomeReal &bestsol, tFitness &bestfitness) 
 	}
 
 	if (fitness_alg != old_fitness) {
-	    num_improvement_ea++;
+	    m_num_improvement_ea++;
 	}
-	num_total_ea++;
+	m_num_total_ea++;
 
 	// Check the optime
 	if (m_running->isOptime(fitness_alg)) {
@@ -445,7 +487,7 @@ unsigned MALSChains::realApply(tChromosomeReal &bestsol, tFitness &bestfitness) 
 	m_time_ls += clock()-clock_begin;
 
 	ind->incremCount("ls"); 
-	improvement_ls += fabs(fitness-oldfitness);
+	m_improvement_ls += fabs(fitness-oldfitness);
 
 	setDif(m_debug, "LS ", ind->getId(), oldfitness, fitness);
 
@@ -453,7 +495,7 @@ unsigned MALSChains::realApply(tChromosomeReal &bestsol, tFitness &bestfitness) 
 
 	if (m_problem->isBetter(fitness, fitness_alg)) {
 	    fitness_alg = fitness;
-	    num_improvement_ls++;
+	    m_num_improvement_ls++;
 	}
 	
 	
@@ -512,7 +554,7 @@ unsigned MALSChains::realApply(tChromosomeReal &bestsol, tFitness &bestfitness) 
 	   alg_failed = 0;
 	}
 
-	num_total_ls++;
+	m_num_total_ls++;
 
 	bool restart = false;
 
@@ -528,18 +570,18 @@ unsigned MALSChains::realApply(tChromosomeReal &bestsol, tFitness &bestfitness) 
 		restarts++;
 		alg_failed = 0;
 		
-		print_debug("Restart_AlgFailed\t: %Le\n", fitness_alg);
+		print_info("Restart_AlgFailed\t: %Le\n", fitness_alg);
 
 		fitness_alg = pop_alg->getInd(pop_alg->getBest())->perf();
 
-		print_debug("Restart_AlgNewBest\t: %Le\n", fitness_alg);
+		print_info("Restart_AlgNewBest\t: %Le\n", fitness_alg);
 
 		m_memory->reset();
 	}
 
 	// Update the population size
 	if (m_popReductions.updatePopulationSize(pop_alg)) {
-	   print_debug("ReducedPopulation: %u\n", m_running->numEval());
+	   print_info("ReducedPopulation: %u\n", m_running->numEval());
 	}
 
     }
@@ -550,29 +592,29 @@ unsigned MALSChains::realApply(tChromosomeReal &bestsol, tFitness &bestfitness) 
         double ratio_effort = ( (double) m_nevalalg)/(m_nevalalg+m_nevalls);
 	print_debug("RatioEffort Alg/LS: [%.0f/%.0f]\n", 100*ratio_effort, 100*(1-ratio_effort));
 
-        double ratio_alg = improvement_alg/(improvement_alg+improvement_ls);
+        double ratio_alg = m_improvement_alg/(m_improvement_alg+m_improvement_ls);
 	print_debug("RatioImprovement Alg/LS: [%.0f/%.0f]\n", 100*ratio_alg, 100*(1-ratio_alg));
 	print_debug("Restarts: %d\n", restarts);
     }
     
-    double time_ms_alg, time_ms_ls, time_ms_ma;
 
-    time_ms_alg = (m_time_alg*1000.0)/CLOCKS_PER_SEC;
-    time_ms_ls = (m_time_ls*1000.0)/CLOCKS_PER_SEC;
-    time_ms_ma = (m_time_ma*1000.0)/CLOCKS_PER_SEC;
 
-    print_info("Time[ALG]: %.2f\n", time_ms_alg);
-    print_info("Time[LS]: %.2f\n", time_ms_ls);
-    print_info("Time[MA]: %.2f\n", time_ms_ma);
-    print_info("RatioTime[ALG/MA]: %.2f\n", 100*time_ms_alg/time_ms_ma);
-    print_info("RatioTime[LS/MA]: %.2f\n", 100*time_ms_ls/time_ms_ma);
- //   print_info("RatioTime[(ALG+LS)/MA]: %.2f\n", 100*(time_ms_alg+time_ms_ls)/time_ms_ma);
+    m_time_ms_alg = (m_time_alg*1000.0)/CLOCKS_PER_SEC;
+    m_time_ms_ls = (m_time_ls*1000.0)/CLOCKS_PER_SEC;
+    m_time_ms_ma = (m_time_ma*1000.0)/CLOCKS_PER_SEC;
 
-    if (num_total_ea > 0) {
-       print_info("NumImprovement[EA]:%d%%\n", (num_improvement_ea*100)/num_total_ea);
+    print_debug("Time[ALG]: %.2f\n", m_time_ms_alg);
+    print_debug("Time[LS]: %.2f\n", m_time_ms_ls);
+    print_debug("Time[MA]: %.2f\n", m_time_ms_ma);
+    print_debug("RatioTime[ALG/MA]: %.2f\n", 100*m_time_ms_alg/m_time_ms_ma);
+    print_debug("RatioTime[LS/MA]: %.2f\n", 100*m_time_ms_ls/m_time_ms_ma);
+ //   print_debug("RatioTime[(ALG+LS)/MA]: %.2f\n", 100*(m_time_ms_alg+m_time_ms_ls)/m_time_ms_ma);
+
+    if (m_num_total_ea > 0) {
+       print_debug("NumImprovement[EA]:%d%%\n", (m_num_improvement_ea*100)/m_num_total_ea);
     }
-    else if (num_total_ls > 0) {
-       print_info("NumImprovement[LS]:%d%%\n", (num_improvement_ls*100)/num_total_ls);
+    if (m_num_total_ls > 0) {
+       print_debug("NumImprovement[LS]:%d%%\n", (m_num_improvement_ls*100)/m_num_total_ls);
     }
     
     unsigned neval = m_running->numEval()-initMax;

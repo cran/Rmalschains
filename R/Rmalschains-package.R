@@ -59,6 +59,10 @@
 #'  
 #' For theoretical background of the algorithm, the reader may refer to the cited literature, where the algorithms where originally proposed.
 #' 
+#' Additional information is also available at the project website: 
+#' 
+#' \url{http://sci2s.ugr.es/dicits/software/Rmalschains}
+#' 
 #' @title Getting started with the Rmalschains package
 #' @name Rmalschains-package
 #' @aliases Rmalschains
@@ -95,6 +99,7 @@
 #' @keywords optimization, MA-LS-Chains
 #' @seealso \code{\link{malschains}}, \code{\link{malschains.control}}
 #' @useDynLib Rmalschains .registration=TRUE
+#' @import Rcpp
 # @exportPattern "^[[:alpha:]]+"
 #' @examples
 #' 
@@ -117,13 +122,14 @@
 #'                        maxEvals=50000, control=malschains.control(popsize=50, 
 #'                        istep=300, ls="cmaes", optimum=-5))
 #' 
+#' \dontrun{
 #' #use only the CMA-ES local search               
-#' res.claw2 <- malschains(function(x) {-claw(x)}, lower=c(-3), upper=c(3), trace=FALSE,
+#' res.claw2 <- malschains(function(x) {-claw(x)}, lower=c(-3), upper=c(3), verbosity=0,
 #'                        maxEvals=50000, control=malschains.control(ls="cmaes", 
 #'                            lsOnly=TRUE, optimum=-5))
 #' 
 #' #use only the Simplex local search               
-#' res.claw3 <- malschains(function(x) {-claw(x)}, lower=c(-3), upper=c(3), trace=FALSE,
+#' res.claw3 <- malschains(function(x) {-claw(x)}, lower=c(-3), upper=c(3), verbosity=0,
 #'                        maxEvals=50000, control=malschains.control(ls="simplex", 
 #'                            lsOnly=TRUE, optimum=-5))
 #'                     
@@ -135,7 +141,8 @@
 #' points(res.claw$sol, -res.claw$fitness, col="red")
 #' points(res.claw2$sol, pch=3, -res.claw2$fitness, col="blue")
 #' points(res.claw3$sol, pch=3, -res.claw3$fitness, col="green")
-#'
+#' 
+#' 
 #' ##############################################
 #' #Example for the rastrigin function
 #' ##############################################
@@ -166,5 +173,6 @@
 #' 
 #' res.rastrigin1
 #' res.rastrigin2
+#' }
 NULL
 

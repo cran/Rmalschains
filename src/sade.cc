@@ -96,7 +96,7 @@ unsigned SADE::realApply(tChromosomeReal &sol, tFitness &fitness) {
         if (m_stat)
 	    m_stat->newGeneration();
 
-        print_debug("m_G = %d\n" ,m_G);
+        print_info("m_G = %d\n" ,m_G);
 
 
         //set the median of the CR parameter according to history
@@ -175,7 +175,7 @@ unsigned SADE::realApply(tChromosomeReal &sol, tFitness &fitness) {
 
 	} // De modificar cada individuo 
 
-        print_debug(" success = %f",(double)successful/((double)(successful+failed)));
+        print_info(" success = %f",(double)successful/((double)(successful+failed)));
 	better = m_pop->getBest();
 	best_fit = m_pop->getInd(better)->perf();
 

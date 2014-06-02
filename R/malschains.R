@@ -20,6 +20,8 @@
 #' @param threshold A threshold which defines for the local search how much improvement is considered as no improvement. If this value is chosen
 #' too low (zero), then the local search will usually always try to improve on the best individual, even if it is already located very close to a local optimum. 
 #' @param lsOnly Apply only the local search algorithm, and not MA-LS-Chains
+#' @param lsParam1 First (optional) parameter. Currently, if local search is cmaes, this is the parameter popsize/lambda of cmaes. If it is not set or not positive, cmaes will calculate this automatically using a heuristic.
+#' @param lsParam2 Second (optional) parameter. Currently, if local search is cmaes, this is the parameter parentssize/mu of cmaes. If it is not set, not positive, or not smaller lambda, cmaes will calculate this automatically using a heuristic.
 #' @references 
 #' 
 #' Molina, D., Lozano, M., Sánchez, A.M., Herrera, F.
@@ -31,7 +33,7 @@
 #' (2010) Evolutionary Computation, 18 (1), pp. 27-63.
 #' 
 #' @export
-malschains.control <- function(popsize=50, ls="cmaes", istep=500, effort=0.5, alpha=0.5, optimum=0, threshold=1e-8, lsOnly=FALSE) {
+malschains.control <- function(popsize=50, ls="cmaes", istep=500, effort=0.5, alpha=0.5, optimum=-Inf, threshold=1e-8, lsOnly=FALSE, lsParam1=0, lsParam2=0) {
   
   if(popsize %% 10 != 0) {
     warning("Only population sizes divisible by 10 are supported. Using rounded value: ", popsize)
@@ -39,13 +41,13 @@ malschains.control <- function(popsize=50, ls="cmaes", istep=500, effort=0.5, al
   }
   if(popsize == 0) popsize <- 10
   
-  list(popsize=popsize, ls=ls, istep=istep, effort=effort, alpha=alpha, optimum=optimum, threshold=threshold, lsOnly=lsOnly)
+  list(popsize=popsize, ls=ls, istep=istep, effort=effort, alpha=alpha, optimum=optimum, threshold=threshold, lsOnly=lsOnly, lsParam1=lsParam1, lsParam2=lsParam2)
 }
 
 
 #' This is the main function of the package. It minimizes the output of the function fn (for maximization, change the sign of the output of fn). 
 #' 
-#' The output of the function is the following:
+#' The output of the function when run with \code{verbosity=2} is the following:
 #' 
 #' \itemize{
 #' \item \code{EA::PopFitness} The fitness of the best, the one at the 1st quartile, the one at the 3rd quartile, and the worst individual.
@@ -60,13 +62,14 @@ malschains.control <- function(popsize=50, ls="cmaes", istep=500, effort=0.5, al
 #' @param upper The upper bound (or bounds) of the search domain.
 #' @param dim The dimension of the problem (if \code{lower} and \code{upper} are vectors it is not needed).
 #' @param maxEvals The maximal number of evaluations of the fitness function. 
-#' @param trace Set/unset the verbose mode.
+#' @param verbosity Set the verbosity level. Currently, meaningful values are 0, 1, 2
 #' @param initialpop An initial population for the evolutionary algorithm can be submitted (as a matrix). Here, prior knowledge
 #' can be introduced to get better results from the algorithm.
 #' @param control A list containing the main options of the algorithm. See \code{\link{malschains.control}}.
 #' @param env The environment in which to evaluate the fitness function. If not given, it is generated.
 #' @param seed A seed value for the random number generator.
-#' @return the function returns a list containing the best individual, \code{sol}, and its \code{fitness}.
+#' @return the function returns a list containing the best individual, \code{sol}, and its \code{fitness}. 
+#' Furthermore, it contains some information on the optimization process, which can be seen using \code{\link{print.malschains}}.
 #' @references 
 #' 
 #' Molina, D., Lozano, M., Sánchez, A.M., Herrera, F.
@@ -78,7 +81,7 @@ malschains.control <- function(popsize=50, ls="cmaes", istep=500, effort=0.5, al
 #' (2010) Evolutionary Computation, 18 (1), pp. 27-63.
 #' 
 #' @export
-malschains <- function(fn, lower, upper, dim, maxEvals, trace=TRUE, initialpop = NULL, control=malschains.control(), seed=NULL, env) {
+malschains <- function(fn, lower, upper, dim, maxEvals=10*control$istep, verbosity=2, initialpop = NULL, control=malschains.control(), seed=NULL, env) {
   
   dimv = length(lower)
   stopifnot(length(lower)==length(upper))
@@ -99,6 +102,8 @@ malschains <- function(fn, lower, upper, dim, maxEvals, trace=TRUE, initialpop =
   threshold <- as.numeric(control$threshold)
   optimum <- as.numeric(control$optimum)
   lsOnly <- control$lsOnly
+  lsParam1 <- as.numeric(control$lsParam1)
+  lsParam2 <- as.numeric(control$lsParam2)
   
   # @param minimize boolean (TRUE indicates that it should minimize, FALSE in other case)
   minimize <- TRUE
@@ -119,8 +124,54 @@ malschains <- function(fn, lower, upper, dim, maxEvals, trace=TRUE, initialpop =
   if (control$ls == "cmaes") control$ls <- "cmaesmyrandom"
   if(is.null(seed)) seed <- 1e8*runif(1)
   
-  res <- .Call( "RmalschainsWrapper", fn, dim, lower, upper, env, control$popsize, maxEvals, control$ls, trace, istep, effort, 
-        alpha, optimum, threshold, minimize, initialpop, seed, lsOnly, PACKAGE = "Rmalschains" )    
-  
+  res <- .Call( "RmalschainsWrapper", fn, dim, lower, upper, env, control$popsize, maxEvals, control$ls, verbosity, istep, effort, 
+        alpha, optimum, threshold, minimize, initialpop, seed, lsOnly, lsParam1, lsParam2, PACKAGE = "Rmalschains" )
+    
+  class(res) <- "malschains" 
   res  
+}
+
+#' Print out some characteristics of a \code{\link{malschains}} result.
+#' The result shows besides the best solution and its fitness the total number of evaluations spent for both EA and LS, 
+#' the ratio of the spent evaluations (also called effort), the ratio of total improvement of the fitness,
+#' the percentage of times that application of the EA/LS yielded improvement, and some timing results in milliseconds. 
+#'  
+#' @title Generic print function for malschains results
+#' @param x the \code{\link{malschains}} result
+#' @param ... additional function parameters (currently not used)
+#' @export
+#' @S3method print malschains
+#' @method print malschains
+# @rdname malschains
+print.malschains <- function(x, ...) {
+  if(!inherits(x, "malschains")) stop("not a legitimate malschains result")
+  
+  cat(sprintf("NumTotalEvalEA: %d\n", x$numEvalEA))
+  cat(sprintf("NumTotalEvalLS: %d\n", x$numEvalLS))  
+  
+  ratio_effort <- x$numEvalEA/(x$numEvalEA+x$numEvalLS)
+  cat(sprintf("RatioEffort EA/LS: [%.0f/%.0f]\n", 100*ratio_effort, 100*(1-ratio_effort)))
+  
+  ratio_alg <- x$improvementEA/(x$improvementEA+x$improvementLS)
+  cat(sprintf("RatioImprovement EA/LS: [%.0f/%.0f]\n", 100*ratio_alg, 100*(1-ratio_alg)))
+  #cat(sprintf(("Restarts: %d\n", restarts))
+  
+  if((x$numTotalEA != 0) && (x$numTotalLS != 0)) {
+    cat(sprintf("PercentageNumImprovement[EA]: %d%%\n", round((x$numImprovementEA*100)/x$numTotalEA)))
+    cat(sprintf("PercentageNumImprovement[LS]: %d%%\n", round((x$numImprovementLS*100)/x$numTotalLS)))    
+  }
+  
+  cat(sprintf("Time[EA]: %.2f\n", x$timeMsEA))
+  cat(sprintf("Time[LS]: %.2f\n", x$timeMsLS))
+  cat(sprintf("Time[MA]: %.2f\n", x$timeMsMA))
+  cat(sprintf("RatioTime[EA/MA]: %.2f\n", 100*x$timeMsEA/x$timeMsMA))
+  cat(sprintf("RatioTime[LS/MA]: %.2f\n", 100*x$timeMsLS/x$timeMsMA))
+  
+  
+  cat("Fitness:\n",sep="")
+  print(x$fitness)
+  cat("Solution:\n",sep="") 
+  print(x$sol)
+  
+  invisible(x)
 }

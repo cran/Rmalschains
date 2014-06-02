@@ -96,6 +96,11 @@
   For theoretical background of the algorithm, the reader
   may refer to the cited literature, where the algorithms
   where originally proposed.
+
+  Additional information is also available at the project
+  website:
+
+  \url{http://sci2s.ugr.es/dicits/software/Rmalschains}
 }
 \examples{
 ##############################################
@@ -117,13 +122,14 @@ res.claw <- malschains(function(x) {-claw(x)}, lower=c(-3), upper=c(3),
                        maxEvals=50000, control=malschains.control(popsize=50,
                        istep=300, ls="cmaes", optimum=-5))
 
+\dontrun{
 #use only the CMA-ES local search
-res.claw2 <- malschains(function(x) {-claw(x)}, lower=c(-3), upper=c(3), trace=FALSE,
+res.claw2 <- malschains(function(x) {-claw(x)}, lower=c(-3), upper=c(3), verbosity=0,
                        maxEvals=50000, control=malschains.control(ls="cmaes",
                            lsOnly=TRUE, optimum=-5))
 
 #use only the Simplex local search
-res.claw3 <- malschains(function(x) {-claw(x)}, lower=c(-3), upper=c(3), trace=FALSE,
+res.claw3 <- malschains(function(x) {-claw(x)}, lower=c(-3), upper=c(3), verbosity=0,
                        maxEvals=50000, control=malschains.control(ls="simplex",
                            lsOnly=TRUE, optimum=-5))
 
@@ -135,6 +141,7 @@ plot(x,claw_x, type="l")
 points(res.claw$sol, -res.claw$fitness, col="red")
 points(res.claw2$sol, pch=3, -res.claw2$fitness, col="blue")
 points(res.claw3$sol, pch=3, -res.claw3$fitness, col="green")
+
 
 ##############################################
 #Example for the rastrigin function
@@ -166,6 +173,7 @@ res.rastrigin2 <- malschains(rastrigin, lower=seq(-1.0, -1.0, length=30),
 
 res.rastrigin1
 res.rastrigin2
+}
 }
 \author{
   Christoph Bergmeir \email{c.bergmeir@decsai.ugr.es}

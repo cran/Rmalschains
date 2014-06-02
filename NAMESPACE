@@ -1,3 +1,5 @@
 export(malschains.control)
 export(malschains)
+import(Rcpp)
+S3method(print,malschains)
 useDynLib(Rmalschains,.registration=TRUE)

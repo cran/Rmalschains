@@ -83,6 +83,19 @@ public:
 
 	RunningPtr getRunning(); 
 
+        unsigned getNumEvalEA();
+        unsigned getNumEvalLS();
+
+	int getNumImprovementEA();
+	int getNumImprovementLS();
+	int getNumTotalEA();
+	int getNumTotalLS();
+	tFitness getImprovementEA();
+	tFitness getImprovementLS();
+	double getTimeMsEA();
+	double getTimeMsLS();
+	double getTimeMsMA();
+
 	/**
 	 * Set the restart strategy. If it is not called never it will make a restart.
 	 */
@@ -141,6 +154,13 @@ protected:
 	RestartStrategy *m_restart;
 	SelectImprovementLS *m_select_improvement;
 	bool m_debug;
+
+    int m_num_improvement_ea, m_num_improvement_ls;
+    int m_num_total_ea, m_num_total_ls;
+    tFitness m_improvement_alg, m_improvement_ls;
+    double m_time_ms_alg, m_time_ms_ls, m_time_ms_ma;
+
+
 };
 
 

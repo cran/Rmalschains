@@ -11,20 +11,24 @@ claw <- function(xx) {
 }
 
 #use MA-LS-Chains
-res.claw <- malschains(function(x) {-claw(x)}, lower=c(-3), upper=c(3), trace=FALSE,
+res.claw <- malschains(function(x) {-claw(x)}, lower=c(-3), upper=c(3), verbosity=0,
                        maxEvals=50000, control=malschains.control(popsize=50, 
                        istep=300, ls="cmaes", optimum=-5))
 
 #use only the CMA-ES local search               
-res.claw2 <- malschains(function(x) {-claw(x)}, lower=c(-3), upper=c(3), trace=FALSE,
+res.claw2 <- malschains(function(x) {-claw(x)}, lower=c(-3), upper=c(3), verbosity=0,
                        maxEvals=50000, control=malschains.control(ls="cmaes", 
                            lsOnly=TRUE, optimum=-5))
 
 #use only the Simplex local search               
-res.claw3 <- malschains(function(x) {-claw(x)}, lower=c(-3), upper=c(3), trace=FALSE,
+res.claw3 <- malschains(function(x) {-claw(x)}, lower=c(-3), upper=c(3), verbosity=0,
                        maxEvals=50000, control=malschains.control(ls="simplex", 
                            lsOnly=TRUE, optimum=-5))
-                   
+
+res.claw
+res.claw2
+res.claw3
+
 x <- seq(-3, 3,length=1000)
 claw_x <- NULL
 for (i in 1:length(x)) claw_x[i] <- claw(x[i])

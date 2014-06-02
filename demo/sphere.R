@@ -14,7 +14,7 @@ sphere <- function(x)
   sum
 }
 
-res.sphere <- malschains(sphere, lower=seq(-1.0, -1.0, length=30), upper=seq(1.0, 1.0, length=30), maxEvals=50000, 
+res.sphere <- malschains(sphere, lower=rep(-1.0, 30), upper=rep(1.0, 30), maxEvals=50000, 
     control=malschains.control(effort=0.8, alpha=0.3, popsize=20, istep=100, ls="simplex"))
 
 res.sphere

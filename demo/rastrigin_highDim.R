@@ -14,7 +14,7 @@ rastrigin <- function(x) {
   res 
 }
 
-res.rastrigin.highDim <- malschains(rastrigin, lower=seq(-1.0, -1.0, length=1000), upper=seq(1.0, 1.0, length=1000), maxEvals=50000, 
+res.rastrigin.highDim <- malschains(rastrigin, lower=rep(-1.0, 1000), upper=rep(1.0, 1000), maxEvals=50000, 
     control=malschains.control(effort=0.8, alpha=0.3, popsize=20, istep=100, ls="ssw"))
 
 res.rastrigin.highDim

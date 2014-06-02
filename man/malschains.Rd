@@ -2,7 +2,8 @@
 \alias{malschains}
 \title{Perform optimization with the MA-LS-Chains algorithm}
 \usage{
-  malschains(fn, lower, upper, dim, maxEvals, trace = TRUE,
+  malschains(fn, lower, upper, dim,
+    maxEvals = 10 * control$istep, verbosity = 2,
     initialpop = NULL, control = malschains.control(),
     seed = NULL, env)
 }
@@ -21,7 +22,8 @@
   \item{maxEvals}{The maximal number of evaluations of the
   fitness function.}
 
-  \item{trace}{Set/unset the verbose mode.}
+  \item{verbosity}{Set the verbosity level. Currently,
+  meaningful values are 0, 1, 2}
 
   \item{initialpop}{An initial population for the
   evolutionary algorithm can be submitted (as a matrix).
@@ -40,6 +42,9 @@
 \value{
   the function returns a list containing the best
   individual, \code{sol}, and its \code{fitness}.
+  Furthermore, it contains some information on the
+  optimization process, which can be seen using
+  \code{\link{print.malschains}}.
 }
 \description{
   This is the main function of the package. It minimizes
@@ -47,7 +52,8 @@
   the sign of the output of fn).
 }
 \details{
-  The output of the function is the following:
+  The output of the function when run with
+  \code{verbosity=2} is the following:
 
   \itemize{ \item \code{EA::PopFitness} The fitness of the
   best, the one at the 1st quartile, the one at the 3rd

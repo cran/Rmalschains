@@ -3,8 +3,9 @@
 \title{Sets and initializes the main parameters of the algorithm}
 \usage{
   malschains.control(popsize = 50, ls = "cmaes",
-    istep = 500, effort = 0.5, alpha = 0.5, optimum = 0,
-    threshold = 1e-08, lsOnly = FALSE)
+    istep = 500, effort = 0.5, alpha = 0.5, optimum = -Inf,
+    threshold = 1e-08, lsOnly = FALSE, lsParam1 = 0,
+    lsParam2 = 0)
 }
 \arguments{
   \item{popsize}{The population size of the evolutionary
@@ -54,6 +55,18 @@
 
   \item{lsOnly}{Apply only the local search algorithm, and
   not MA-LS-Chains}
+
+  \item{lsParam1}{First (optional) parameter. Currently, if
+  local search is cmaes, this is the parameter
+  popsize/lambda of cmaes. If it is not set or not
+  positive, cmaes will calculate this automatically using a
+  heuristic.}
+
+  \item{lsParam2}{Second (optional) parameter. Currently,
+  if local search is cmaes, this is the parameter
+  parentssize/mu of cmaes. If it is not set, not positive,
+  or not smaller lambda, cmaes will calculate this
+  automatically using a heuristic.}
 }
 \description{
   This is a function that initializes and sets the

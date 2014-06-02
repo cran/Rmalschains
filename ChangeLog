@@ -1,3 +1,11 @@
+30/03/2014 version 0.2-2:
+
+- changed defaults: maxEval=10*istep, optimum=-Inf
+- replaced seq(x, x, length=y) in demos by rep(x, y)
+- made the cmaes parameters lambda and mu available in the user interface
+- the function now returns more information, and the result is of type "malschains"
+- removed a needless extern "C"
+
 10/05/2013 version 0.2-1:
 
 - disabled restarting because it may yield to a result of 0 fitness and causes R to crash in Windows x64

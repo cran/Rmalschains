@@ -328,7 +328,7 @@ ILocalSearch *get_LS(string arg_ls, DomainRealPtr domain, Random *random) {
 		throw string("localsearch '" +arg_ls +"' is unknown");
 	}
 
-     print_info("%s\n", print_str.c_str());
+     print_debug("%s\n", print_str.c_str());
 
      return ls;
 }
@@ -344,7 +344,7 @@ void set_Effort(Hybrid *hybrid, string effort) {
        ratio = 0.5;
     }
 
-     print_info("LS::Effort: %f\n", ratio);
+     print_debug("LS::Effort: %f\n", ratio);
      hybrid->setEffortRatio(ratio);
 }
 
@@ -354,7 +354,7 @@ void set_MaxEval(IEA *ea, string maxeval) {
       assert(imaxeval > 0);
       unsigned maxeval = imaxeval; 
 
-      print_info("EA::MaxEval: %u\n", maxeval);
+      print_debug("EA::MaxEval: %u\n", maxeval);
       ea->setMaxEval(maxeval);
 
    }
