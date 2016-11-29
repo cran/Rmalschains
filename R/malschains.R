@@ -81,6 +81,7 @@ malschains.control <- function(popsize=50, ls="cmaes", istep=500, effort=0.5, al
 #' (2010) Evolutionary Computation, 18 (1), pp. 27-63.
 #' 
 #' @export
+#' @importFrom stats runif
 malschains <- function(fn, lower, upper, dim, maxEvals=10*control$istep, verbosity=2, initialpop = NULL, control=malschains.control(), seed=NULL, env) {
   
   dimv = length(lower)

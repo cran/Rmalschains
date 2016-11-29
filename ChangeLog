@@ -1,3 +1,15 @@
+29/11/2016 version 0.2-3:
+
+- fixed a clang compiler bug as follows:
+
+newmat6.cpp:431:13: error: ordered comparison between pointer and zero ('int *' and 'int')
+   if (indx > 0) { delete [] indx; indx = 0; }
+       ~~~~ ^ ~
+
+- added CITATION file to include JSS paper
+- some more changes to pass CRAN checks
+
+
 30/03/2014 version 0.2-2:
 
 - changed defaults: maxEval=10*istep, optimum=-Inf

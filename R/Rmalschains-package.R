@@ -84,6 +84,10 @@
 #' 
 #' @references 
 #' 
+#' Bergmeir, C., Molina, D., Benítez, J.M. 
+#' Memetic Algorithms with Local Search Chains in R: The Rmalschains Package
+#' (2016) Journal of Statistical Software, 75(4), 1-33., doi:10.18637/jss.v075.i04
+#'
 #' Molina, D., Lozano, M., Sánchez, A.M., Herrera, F.
 #' Memetic algorithms based on local search chains for large scale continuous optimisation problems: MA-SSW-Chains
 #' (2011) Soft Computing, 15 (11), pp. 2201-2220. 
