@@ -1,8 +1,8 @@
-ffa1fea98326835dfec78ef5f5c1a751 *ChangeLog
-4bbb60ee8adc43896d48ccbaa2ff8a38 *DESCRIPTION
+a5389cde0c49d44fd30d7104de417cf1 *ChangeLog
+f5c09f7101d74093109d7388400944f5 *DESCRIPTION
 da2d092bcef8a05ed9d7c4b066a44c31 *LICENSE
 a250f85a14f8936d6dbb5d35b2762a5b *NAMESPACE
-66768000954bd661550c0703f543dd51 *R/Rmalschains-package.R
+06d1dfbbd8e15a26bf6b18c06202c6d5 *R/Rmalschains-package.R
 e7ed4d686ab109f3780d6e9aa43d21a0 *R/malschains.R
 bd22f6306e0327208a3e5a3222f44137 *demo/00Index
 34861a7124707256a6ca8b2978d598a5 *demo/claw.R
@@ -11,7 +11,7 @@ e9b580a350e1b196684d3926a4452cb7 *demo/rastrigin_highDim.R
 7345c05e3508e10768abe2cfabceef73 *demo/rastrigin_inline.R
 1dc5af84ba872837547e48b7cf624b31 *demo/sphere.R
 969fac3689054f843f79619f45a65b1e *inst/CITATION
-59b195d3bbb471e5ffc9773358d29ca1 *man/Rmalschains-package.Rd
+d532f37c8f54a87c827f23eb82c020cf *man/Rmalschains-package.Rd
 0f7f9438d754859c3f593991333c84e2 *man/malschains.Rd
 d9358a4fb3860d3eece59731ab13a19b *man/malschains.control.Rd
 1b5ca0e850127f282562ccf5776b848f *man/print.malschains.Rd
@@ -21,6 +21,7 @@ d9358a4fb3860d3eece59731ab13a19b *man/malschains.control.Rd
 77b6b8a65cc942ebb3e432407c3799e3 *src/Makevars.win
 2e114a91070428e990f5c16a52450305 *src/RmalschainsEvaluate.h
 e3472e3067a0348b175883a2a7de2d42 *src/RmalschainsWrapper.cpp
+d8cad1cd36bc42bd8acd871f8d242ad4 *src/Rmalschains_init.c
 5760d3fd1a6a75c08657efc7d32e5306 *src/bandmat.cpp
 7373634f8719d74e06426e53dae81dfd *src/chc.cc
 da3a4faf3d068f92caab40e54cbddac9 *src/chc.h
@@ -103,7 +104,7 @@ fc837140049fb503b9bfdc724fafa535 *src/newfft.cpp
 44ffb0371568431109af25921155a68d *src/newmat2.cpp
 560cfd20cda9ec8ac8271e2449fc40b3 *src/newmat3.cpp
 045416d8772e79358d386d5d15c3f07c *src/newmat4.cpp
-19056ee898c5d24b30291f5e726ba8e6 *src/newmat5.cpp
+5e0c80fd51e1a166d27ac7e9a9730e52 *src/newmat5.cpp
 50f96ddd3665dc9a31512d2927e10034 *src/newmat6.cpp
 675b004745008ab985019eb2bf5bb910 *src/newmat7.cpp
 f64c8decc5c1f56c7b822157483bb406 *src/newmat8.cpp

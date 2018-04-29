@@ -1,3 +1,7 @@
+28/4/2018 version 0.2-4:
+
+- fixed a warning and some other CRAN issues
+
 29/11/2016 version 0.2-3:
 
 - fixed a clang compiler bug as follows:

@@ -59,9 +59,6 @@
 #'  
 #' For theoretical background of the algorithm, the reader may refer to the cited literature, where the algorithms where originally proposed.
 #' 
-#' Additional information is also available at the project website: 
-#' 
-#' \url{http://sci2s.ugr.es/dicits/software/Rmalschains}
 #' 
 #' @title Getting started with the Rmalschains package
 #' @name Rmalschains-package
@@ -76,7 +73,7 @@
 #' 
 #' José M. Benítez \email{j.m.benitez@@decsai.ugr.es}
 #'
-#' DiCITS Lab, Sci2s group, DECSAI, University of Granada. \url{http://dicits.ugr.es}.
+#' DiCITS Lab, Sci2s group, DECSAI, University of Granada. \url{http://sci2s.ugr.es/dicits/}.
 #' 
 #' Additional information is also available at our group's website of continuous optimization:
 #' 

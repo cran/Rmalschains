@@ -67,10 +67,6 @@ of the target function. The package provides an interface which allows to pass t
 demo for how to do that. The demo also shows how an environment can in this approach be used to pass additional parameters to the target function. 
  
 For theoretical background of the algorithm, the reader may refer to the cited literature, where the algorithms where originally proposed.
-
-Additional information is also available at the project website:
-
-\url{http://sci2s.ugr.es/dicits/software/Rmalschains}
 }
 \examples{
 
@@ -153,7 +149,7 @@ Daniel Molina \email{dmolina@decsai.ugr.es}
 
 José M. Benítez \email{j.m.benitez@decsai.ugr.es}
 
-DiCITS Lab, Sci2s group, DECSAI, University of Granada. \url{http://dicits.ugr.es}.
+DiCITS Lab, Sci2s group, DECSAI, University of Granada. \url{http://sci2s.ugr.es/dicits/}.
 
 Additional information is also available at our group's website of continuous optimization:
 
