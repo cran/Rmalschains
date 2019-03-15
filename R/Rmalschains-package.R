@@ -73,11 +73,12 @@
 #' 
 #' José M. Benítez \email{j.m.benitez@@decsai.ugr.es}
 #'
-#' DiCITS Lab, Sci2s group, DECSAI, University of Granada. \url{http://sci2s.ugr.es/dicits/}.
-#' 
-#' Additional information is also available at our group's website of continuous optimization:
-#' 
-#' \url{http://sci2s.ugr.es/EAMHCO/}
+#' DiCITS Lab, Sci2s group, DECSAI, University of Granada. 
+# \url{http://sci2s.ugr.es/dicits/}.
+# 
+# Additional information is also available at our group's website of continuous optimization:
+# 
+# \url{http://sci2s.ugr.es/EAMHCO/}
 #' 
 #' @references 
 #' 

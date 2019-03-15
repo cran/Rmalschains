@@ -2841,6 +2841,9 @@ void ERRORMESSAGE( char const *s1, char const *s2,
 char *szCat(const char *sz1, const char*sz2, 
 	    const char *sz3, const char *sz4)
 {
+
+//removed by C Bergmeir 13/3/2019, to omit CRAN Wstringop-overflow warning of below code
+/*
   static char szBuf[700];
 
   if (!sz1)
@@ -2858,6 +2861,9 @@ char *szCat(const char *sz1, const char*sz2,
     strncat((char *)szBuf, sz4, 
 	    (unsigned)intMin((int)strlen(sz4)+1, 698 - (int)strlen((char const *)szBuf)));
   return (char *) szBuf;
+*/
+  return (char *) sz1;
+
 }
 
 void cmaes_print_info(cmaes_t *t) {

@@ -1,8 +1,8 @@
-a5389cde0c49d44fd30d7104de417cf1 *ChangeLog
-f5c09f7101d74093109d7388400944f5 *DESCRIPTION
+38f0c4f1b56869e460f50843507de0e7 *ChangeLog
+dedf7aa25c0d5e98b942283c700ea58c *DESCRIPTION
 da2d092bcef8a05ed9d7c4b066a44c31 *LICENSE
 a250f85a14f8936d6dbb5d35b2762a5b *NAMESPACE
-06d1dfbbd8e15a26bf6b18c06202c6d5 *R/Rmalschains-package.R
+70607de5e05a60dec96b08796dda8320 *R/Rmalschains-package.R
 e7ed4d686ab109f3780d6e9aa43d21a0 *R/malschains.R
 bd22f6306e0327208a3e5a3222f44137 *demo/00Index
 34861a7124707256a6ca8b2978d598a5 *demo/claw.R
@@ -11,7 +11,7 @@ e9b580a350e1b196684d3926a4452cb7 *demo/rastrigin_highDim.R
 7345c05e3508e10768abe2cfabceef73 *demo/rastrigin_inline.R
 1dc5af84ba872837547e48b7cf624b31 *demo/sphere.R
 969fac3689054f843f79619f45a65b1e *inst/CITATION
-d532f37c8f54a87c827f23eb82c020cf *man/Rmalschains-package.Rd
+fe1289a39d508dfacad827432cddfd6e *man/Rmalschains-package.Rd
 0f7f9438d754859c3f593991333c84e2 *man/malschains.Rd
 d9358a4fb3860d3eece59731ab13a19b *man/malschains.control.Rd
 1b5ca0e850127f282562ccf5776b848f *man/print.malschains.Rd
@@ -122,7 +122,7 @@ e213ebe08e7a01efbe5a4747108d3dd2 *src/newutil.h
 eea005c9abd5bcdda30f91ff87a6df84 *src/nm_misc.cpp
 2631924838feca1191f66fc6c7076a7e *src/orandom.cc
 654aee31e87aaac7c28150bbaddc26e1 *src/orandom.h
-379b1c22dcaf4ec2e89f5bf6650d42fd *src/origcmaes.cc
+2b51e753ec7c57bdc8c945190974c6a9 *src/origcmaes.cc
 384a92b5c2472851644ade30e3689962 *src/origcmaes.h
 4d7684f8d1a83ca5098e48bc1e05629e *src/popobserver.h
 6c50472382093c8db901b80164edd945 *src/populationchc.cc
