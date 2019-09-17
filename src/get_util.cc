@@ -33,7 +33,7 @@ double string_to_double( const std::string& s )
    return x;
 } 
 using namespace realea;
-using std::auto_ptr;
+using std::unique_ptr;
 
 void set_InitVerbose(void) {
     enable_print_info();

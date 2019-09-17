@@ -25,6 +25,7 @@
 #include <cassert>
 #include <cmath>
 
+using namespace std::placeholders;
 using namespace realea;
 
 class SolisParams : public ILSParameters {
@@ -184,7 +185,7 @@ unsigned SolisWets::apply(ILSParameters *params, tChromosomeReal &sol, tFitness 
 
 	 // Adapto bias 
 	 transform(p->bias.begin(), p->bias.end(), dif.begin(), p->bias.begin(), 
-		     ptr_fun(increm_bias));
+		     increm_bias);
 	 p->numSuccess++;
 	 p->numFailed = 0;
       }
@@ -204,15 +205,18 @@ unsigned SolisWets::apply(ILSParameters *params, tChromosomeReal &sol, tFitness 
 
 	    // Disminuyo bias
 	    transform(p->bias.begin(), p->bias.end(), dif.begin(), p->bias.begin(), 
-			ptr_fun(dec_bias));
+			dec_bias);
 
 	    p->numSuccess++;
 	    p->numFailed = 0;
 	 }
 	 else {
 	    // Se reduce bias a la mitad
+	    //old: bind2nd(multiplies<double>(), 0.5)
 	    transform(p->bias.begin(), p->bias.end(), p->bias.begin(), 
-			bind2nd(multiplies<double>(), 0.5));
+	    	std::bind(multiplies<double>(), _1, 0.5)
+		);
+
 	    p->numFailed++;
 	    p->numSuccess = 0;
 	 }

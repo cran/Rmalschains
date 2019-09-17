@@ -1,3 +1,14 @@
+16/9/2019 version 0.2-6:
+
+- made C++11 a requirement, to use C99 code in C++
+- fixed useDynLib roxygen issue
+- changed deprecated things: 
+  * changed auto_ptr to unique_ptr
+  * simply removed ptr_fun (passing functions directly as arguments now, no lambda needed)
+  * replaced bind2nd with bind
+- fixed a PROTECT error in RmalschainsEvaluate.h
+- fixed some gcc9 errors
+
 13/3/2019 version 0.2-5:
 
 - fixed a warning

@@ -17,4 +17,3 @@ The result shows besides the best solution and its fitness the total number of e
 the ratio of the spent evaluations (also called effort), the ratio of total improvement of the fitness,
 the percentage of times that application of the EA/LS yielded improvement, and some timing results in milliseconds.
 }
-

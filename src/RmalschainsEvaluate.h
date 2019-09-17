@@ -24,8 +24,10 @@
 	private:
 	    SEXP fcall, env;
 	    double defaultfun(SEXP par) { 		// essentialy the same as the old evaluate
-		SEXP fn = ::Rf_lang2(fcall, par); 	// this could be done with Rcpp 
+		SEXP fn = PROTECT(::Rf_lang2(fcall, par)); 	// this could be done with Rcpp 
 		SEXP sexp_fvec = ::Rf_eval(fn, env);	// but is still a lot slower right now
+		UNPROTECT(1);		
+
 		double f_result = REAL(sexp_fvec)[0];
 		if (ISNAN(f_result)) 
 		    ::Rf_error("NaN value of objective function! \nPerhaps adjust the bounds.");

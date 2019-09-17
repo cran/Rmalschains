@@ -98,9 +98,9 @@
 #' Memetic algorithms for continuous optimisation based on local search chains
 #' (2010) Evolutionary Computation, 18 (1), pp. 27-63.
 #' 
-#' @keywords optimization, MA-LS-Chains
+#' @keywords optimization MA-LS-Chains
 #' @seealso \code{\link{malschains}}, \code{\link{malschains.control}}
-#' @useDynLib Rmalschains .registration=TRUE
+#' @useDynLib Rmalschains, .registration=TRUE
 #' @import Rcpp
 # @exportPattern "^[[:alpha:]]+"
 #' @examples

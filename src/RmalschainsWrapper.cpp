@@ -23,7 +23,7 @@
 
 using namespace realea;
 using namespace std;
-using std::auto_ptr;
+using std::unique_ptr;
 
 EvalBase *ev = NULL;
 

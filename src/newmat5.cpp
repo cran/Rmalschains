@@ -491,8 +491,8 @@ MatrixInput::~MatrixInput()
 {
    REPORT
    Tracer et("MatrixInput");
-   //20180426 get rid of warning: throw will always call terminate() [-Wterminate] 
-   //if (n!=0) Throw(ProgramException("A list of values was too short"));
+//CB 16/9/2019 get rid of a warning. Also, destructors shouldn't be throwing exceptions   
+//if (n!=0) Throw(ProgramException("A list of values was too short"));
 }
 
 MatrixInput BandMatrix::operator<<(double)

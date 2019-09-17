@@ -551,11 +551,13 @@ GeneralMatrix* AddedMatrix::Evaluate(MatrixType mtd)
          Try { gmx = mtd.New(nr,nc,this); }
          CatchAll
          {
-            if (!c1) gm1->tDelete(); if (!c2) gm2->tDelete();
+            if (!c1) gm1->tDelete(); 
+            if (!c2) gm2->tDelete();
             ReThrow;
          }
          AddDS(gmx,gm1,gm2);
-         if (!c1) gm1->tDelete(); if (!c2) gm2->tDelete();
+         if (!c1) gm1->tDelete(); 
+         if (!c2) gm2->tDelete();
          gmx->ReleaseAndDelete();
       }
    }
@@ -615,7 +617,8 @@ GeneralMatrix* SubtractedMatrix::Evaluate(MatrixType mtd)
       else if (c2 && gm2->reuse() )
       {
          REPORT ReverseSubtractDS(gm2,gm1);
-         if (!c1) gm1->tDelete(); gmx = gm2;
+         if (!c1) gm1->tDelete(); 
+         gmx = gm2;
       }
       else
       {
@@ -624,11 +627,13 @@ GeneralMatrix* SubtractedMatrix::Evaluate(MatrixType mtd)
          Try { gmx = mtd.New(nr,nc,this); }
          CatchAll
          {
-            if (!c1) gm1->tDelete(); if (!c2) gm2->tDelete();
+            if (!c1) gm1->tDelete(); 
+            if (!c2) gm2->tDelete();
             ReThrow;
          }
          SubtractDS(gmx,gm1,gm2);
-         if (!c1) gm1->tDelete(); if (!c2) gm2->tDelete();
+         if (!c1) gm1->tDelete(); 
+         if (!c2) gm2->tDelete();
          gmx->ReleaseAndDelete();
       }
    }
@@ -694,11 +699,13 @@ GeneralMatrix* SPMatrix::Evaluate(MatrixType mtd)
          Try { gmx = mtd.New(nr,nc,this); }
          CatchAll
          {
-            if (!c1) gm1->tDelete(); if (!c2) gm2->tDelete();
+            if (!c1) gm1->tDelete(); 
+            if (!c2) gm2->tDelete();
             ReThrow;
          }
          SPDS(gmx,gm1,gm2);
-         if (!c1) gm1->tDelete(); if (!c2) gm2->tDelete();
+         if (!c1) gm1->tDelete(); 
+         if (!c2) gm2->tDelete();
          gmx->ReleaseAndDelete();
       }
    }
@@ -778,8 +785,10 @@ static bool RealEqual(Real* s1, Real* s2, int n)
    int i = n >> 2;
    while (i--)
    {
-      if (*s1++ != *s2++) return false; if (*s1++ != *s2++) return false;
-      if (*s1++ != *s2++) return false; if (*s1++ != *s2++) return false;
+      if (*s1++ != *s2++) return false; 
+      if (*s1++ != *s2++) return false;
+      if (*s1++ != *s2++) return false; 
+      if (*s1++ != *s2++) return false;
    }
    i = n & 3; while (i--) if (*s1++ != *s2++) return false;
    return true;
@@ -790,8 +799,10 @@ static bool intEqual(int* s1, int* s2, int n)
    int i = n >> 2;
    while (i--)
    {
-      if (*s1++ != *s2++) return false; if (*s1++ != *s2++) return false;
-      if (*s1++ != *s2++) return false; if (*s1++ != *s2++) return false;
+      if (*s1++ != *s2++) return false; 
+      if (*s1++ != *s2++) return false;
+      if (*s1++ != *s2++) return false; 
+      if (*s1++ != *s2++) return false;
    }
    i = n & 3; while (i--) if (*s1++ != *s2++) return false;
    return true;
@@ -868,8 +879,10 @@ bool GeneralMatrix::is_zero() const
    Real* s=store; int i = storage >> 2;
    while (i--)
    {
-      if (*s++) return false; if (*s++) return false;
-      if (*s++) return false; if (*s++) return false;
+      if (*s++) return false; 
+      if (*s++) return false;
+      if (*s++) return false; 
+      if (*s++) return false;
    }
    i = storage & 3; while (i--) if (*s++) return false;
    return true;

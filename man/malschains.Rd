@@ -56,4 +56,3 @@ Molina, D., Lozano, M., García-Martínez, C., Herrera, F.
 Memetic algorithms for continuous optimisation based on local search chains
 (2010) Evolutionary Computation, 18 (1), pp. 27-63.
 }
-

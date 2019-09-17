@@ -187,7 +187,7 @@ protected:
 	tAfterEvalFunction m_notify;
 };
 
-typedef auto_ptr<Problem> ProblemPtr;
+typedef unique_ptr<Problem> ProblemPtr;
 typedef ProblemPtr& ProblemParamPtr;
 
 

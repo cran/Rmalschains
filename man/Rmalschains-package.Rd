@@ -2,8 +2,8 @@
 % Please edit documentation in R/Rmalschains-package.R
 \docType{package}
 \name{Rmalschains-package}
-\alias{Rmalschains}
 \alias{Rmalschains-package}
+\alias{Rmalschains}
 \title{Getting started with the Rmalschains package}
 \description{
 This package implements an algorithm family for continuous
@@ -142,15 +142,6 @@ res.rastrigin1
 res.rastrigin2
 }
 }
-\author{
-Christoph Bergmeir \email{c.bergmeir@decsai.ugr.es} 
-
-Daniel Molina \email{dmolina@decsai.ugr.es}
-
-José M. Benítez \email{j.m.benitez@decsai.ugr.es}
-
-DiCITS Lab, Sci2s group, DECSAI, University of Granada.
-}
 \references{
 Bergmeir, C., Molina, D., Benítez, J.M. 
 Memetic Algorithms with Local Search Chains in R: The Rmalschains Package
@@ -171,6 +162,14 @@ Memetic algorithms for continuous optimisation based on local search chains
 \seealso{
 \code{\link{malschains}}, \code{\link{malschains.control}}
 }
-\keyword{MA-LS-Chains}
-\keyword{optimization,}
+\author{
+Christoph Bergmeir \email{c.bergmeir@decsai.ugr.es} 
 
+Daniel Molina \email{dmolina@decsai.ugr.es}
+
+José M. Benítez \email{j.m.benitez@decsai.ugr.es}
+
+DiCITS Lab, Sci2s group, DECSAI, University of Granada.
+}
+\keyword{MA-LS-Chains}
+\keyword{optimization}

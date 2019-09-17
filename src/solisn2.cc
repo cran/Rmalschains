@@ -256,7 +256,7 @@ unsigned SWN2Dim::apply(ILSParameters *params, tChromosomeReal &sol, tFitness &s
 
 	 // Adapto bias 
 	 transform(p->bias.begin(), p->bias.end(), dif.begin(), p->bias.begin(), 
-		     ptr_fun(increm_bias));
+		     increm_bias);
 	 p->numSuccess++;
 	 p->numFailed = 0;
       }
@@ -276,7 +276,7 @@ unsigned SWN2Dim::apply(ILSParameters *params, tChromosomeReal &sol, tFitness &s
 
 	    // Disminuyo bias
 	    transform(p->bias.begin(), p->bias.end(), dif.begin(), p->bias.begin(), 
-			ptr_fun(dec_bias));
+			dec_bias);
 
 	    p->numSuccess++;
 	    p->numFailed = 0;
@@ -284,7 +284,7 @@ unsigned SWN2Dim::apply(ILSParameters *params, tChromosomeReal &sol, tFitness &s
 	 else {
 	    // Se reduce bias a la mitad
 	    transform(p->bias.begin(), p->bias.end(), dif.begin(), p->bias.begin(), 
-			ptr_fun(divide_bias));
+			divide_bias);
 	    p->numFailed++;
 	    p->numSuccess = 0;
 	 }

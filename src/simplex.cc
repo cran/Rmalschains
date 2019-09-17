@@ -102,8 +102,7 @@ void SimplexParams::calculateCentroide(void) {
    }
      
    // acumulo los valores por cada variable
-   m_cum_simplex = accumulate(m_simplex.begin(), m_simplex.end(), m_cum_simplex, 
-	       ptr_fun(accumulate_var));
+   m_cum_simplex = accumulate(m_simplex.begin(), m_simplex.end(), m_cum_simplex, accumulate_var);
 }
 
 void SimplexParams::getBest(vector<tGen> &sol, tFitness &fitness) {

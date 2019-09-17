@@ -177,7 +177,7 @@ static double rgdouMax( const double *rgd, int len);
 static double rgdouMin( const double *rgd, int len);
 static double douMax( double d1, double d2);
 static double douMin( double d1, double d2);
-static int    intMin( int i, int j);
+/*static int    intMin( int i, int j);*/
 static int    MaxIdx( const double *rgd, int len);
 static int    MinIdx( const double *rgd, int len);
 static double myhypot(double a, double b);
@@ -2280,9 +2280,11 @@ double random_Uniform( random_t *t)
   return (double)(t->aktrand)/(2.147483647e9);
 }
 
+/*
 static char *
 szCat(const char *sz1, const char*sz2, 
       const char *sz3, const char *sz4);
+*/
 
 /* --------------------------------------------------------- */
 /* -------------- Functions: readpara_t -------------------- */
@@ -2669,11 +2671,12 @@ readpara_SetWeights(readpara_t *t, const char * mode)
 
 /* --------------------------------------------------------- */
 /* --------------------------------------------------------- */
-static int 
+/*static int 
 intMin( int i, int j)
 {
   return i < j ? i : j;
-}
+}*/
+
 static double
 douMax( double i, double j)
 {
@@ -2799,8 +2802,12 @@ cmaes_FATAL(char const *s1, char const *s2, char const *s3,
   time_t t = time(NULL);
   ERRORMESSAGE( s1, s2, s3, s4);
   ERRORMESSAGE("*** Exiting cmaes_t ***",0,0,0);
-  print_error("\n -- %s %s\n", asctime(localtime(&t)), 
-	   s2 ? szCat(s1, s2, s3, s4) : s1);
+  print_error("\n -- %s %s\n", asctime(localtime(&t)), s1);
+  if(s2!=0) {
+    print_error("\n -- %s %s\n", asctime(localtime(&t)), s2);
+    print_error("\n -- %s %s\n", asctime(localtime(&t)), s3);
+    print_error("\n -- %s %s\n", asctime(localtime(&t)), s4);
+  }
   print_error(" *** CMA-ES ABORTED, see errcmaes.err *** \n");
   // exit(1);
 }
@@ -2838,12 +2845,10 @@ void ERRORMESSAGE( char const *s1, char const *s2,
 }
 
 /* ========================================================= */
+/*
 char *szCat(const char *sz1, const char*sz2, 
 	    const char *sz3, const char *sz4)
 {
-
-//removed by C Bergmeir 13/3/2019, to omit CRAN Wstringop-overflow warning of below code
-/*
   static char szBuf[700];
 
   if (!sz1)
@@ -2861,10 +2866,8 @@ char *szCat(const char *sz1, const char*sz2,
     strncat((char *)szBuf, sz4, 
 	    (unsigned)intMin((int)strlen(sz4)+1, 698 - (int)strlen((char const *)szBuf)));
   return (char *) szBuf;
-*/
-  return (char *) sz1;
-
 }
+*/
 
 void cmaes_print_info(cmaes_t *t) {
     //FILE *fp = stdout;
