@@ -4,9 +4,18 @@
 \alias{malschains}
 \title{Perform optimization with the MA-LS-Chains algorithm}
 \usage{
-malschains(fn, lower, upper, dim, maxEvals = 10 * control$istep,
-  verbosity = 2, initialpop = NULL, control = malschains.control(),
-  seed = NULL, env)
+malschains(
+  fn,
+  lower,
+  upper,
+  dim,
+  maxEvals = 10 * control$istep,
+  verbosity = 2,
+  initialpop = NULL,
+  control = malschains.control(),
+  seed = NULL,
+  env
+)
 }
 \arguments{
 \item{fn}{The function to minimize.}

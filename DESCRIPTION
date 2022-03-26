@@ -18,14 +18,14 @@ Description: An implementation of an algorithm family for continuous
     (MA-LS-Chains). Memetic algorithms are hybridizations of genetic
     algorithms with local search methods. They are especially suited
     for continuous optimization.
-Version: 0.2-6
+Version: 0.2-7
 Depends: Rcpp (>= 0.9.10)
 Suggests: inline
 Encoding: UTF-8
 Collate: 'malschains.R' 'Rmalschains-package.R'
-RoxygenNote: 6.1.0
+RoxygenNote: 7.1.2
 NeedsCompilation: yes
-Packaged: 2019-09-17 02:24:15 UTC; bergmeir
+Packaged: 2022-03-26 04:19:48 UTC; cbergmei
 Author: Christoph Bergmeir [aut, cre, cph],
   José M. Benítez [ths],
   Daniel Molina [aut, cph],
@@ -36,4 +36,4 @@ Author: Christoph Bergmeir [aut, cre, cph],
   Nikolaus Hansen [ctb, cph] (Author of the original cmaes implementation
     that ships with the package)
 Repository: CRAN
-Date/Publication: 2019-09-17 09:30:06 UTC
+Date/Publication: 2022-03-27 00:20:02 UTC

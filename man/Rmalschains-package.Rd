@@ -20,7 +20,7 @@ They are especially suited for continuous optimization, as they combine the powe
 algorithms to explore the search space with a local search method to find the local optimum of a 
 promising region. In these algorithms, it is recommended to increase the effort invested in the 
 local search (measured in number of evaluations, called intensity) in the improvement of the 
-most promising solution. However, it is not easy to decide the right intensity for each solution.
+most promising solution. However, it is not easy to decide the right intensity for each solution. 
 
 MA-LS-Chains is a steady-state memetic algorithm, which combines a steady-state genetic algorithm with various
 different local search methods. In contrast to the generational approach, where all 
@@ -40,7 +40,7 @@ The package implements various different local search strategies:
 \item SW A Solis Wets solver
 \item SSW Subgrouping Solis Wets 
 \item Simplex
-}
+}  
 
 CMA-ES is a very effective local search strategy, but quite complicated, and it does not scale well if the amount of 
 parameters to optimize is huge. The Solis Wets solver is pretty simple and therewith fast. The SSW strategy is an
@@ -48,7 +48,7 @@ adapted version of the Solis Wets solver for high dimensional data, so that the 
 scales well with the dimensionality of the data. It applies the Solis Wets solver to randomly chosen subgroups of 
 variables (Subgrouping Solis Wets).
 
-All the local search methods can also be used directly, without making use of the evolutionary algorithm.
+All the local search methods can also be used directly, without making use of the evolutionary algorithm. 
 
 The package contains some demos illustrating its use. To get a list of them, type:
 

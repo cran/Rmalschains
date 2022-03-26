@@ -4,9 +4,18 @@
 \alias{malschains.control}
 \title{Sets and initializes the main parameters of the algorithm}
 \usage{
-malschains.control(popsize = 50, ls = "cmaes", istep = 500,
-  effort = 0.5, alpha = 0.5, optimum = -Inf, threshold = 1e-08,
-  lsOnly = FALSE, lsParam1 = 0, lsParam2 = 0)
+malschains.control(
+  popsize = 50,
+  ls = "cmaes",
+  istep = 500,
+  effort = 0.5,
+  alpha = 0.5,
+  optimum = -Inf,
+  threshold = 1e-08,
+  lsOnly = FALSE,
+  lsParam1 = 0,
+  lsParam2 = 0
+)
 }
 \arguments{
 \item{popsize}{The population size of the evolutionary algorithm.}

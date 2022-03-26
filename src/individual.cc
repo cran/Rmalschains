@@ -104,7 +104,8 @@ tFitness tIndividualReal::perf(void) {
     return m_perf;
 }
 
-struct FindKey : public unary_function<tCounter,bool> {
+// : public unary_function<tCounter,bool> removing inheritance to fix warning on CRAN, 26/3/2022
+struct FindKey {
    string m_key;
 
     bool operator()(const tCounter &value) {

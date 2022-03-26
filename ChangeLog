@@ -1,3 +1,7 @@
+26/3/2022 version 0.2-7:
+
+- removed unary_function and binary_function, which are deprecated
+
 16/9/2019 version 0.2-6:
 
 - made C++11 a requirement, to use C99 code in C++

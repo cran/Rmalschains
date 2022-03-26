@@ -1,5 +1,5 @@
-3a20f97988823a5ff01bae9e1273804c *ChangeLog
-79a5df94633d8a98d95b69491f755f2d *DESCRIPTION
+fb870a859cf071a115fd7351e9bc21bc *ChangeLog
+dcb18202097a437b6796e484f3ef4601 *DESCRIPTION
 da2d092bcef8a05ed9d7c4b066a44c31 *LICENSE
 62d40f01a965d961d4573fadf652dd9d *NAMESPACE
 11eb87837ce4d496fbd5e14771d70b56 *R/Rmalschains-package.R
@@ -11,9 +11,9 @@ e9b580a350e1b196684d3926a4452cb7 *demo/rastrigin_highDim.R
 7345c05e3508e10768abe2cfabceef73 *demo/rastrigin_inline.R
 1dc5af84ba872837547e48b7cf624b31 *demo/sphere.R
 969fac3689054f843f79619f45a65b1e *inst/CITATION
-8e54960c817d2f0b1b1b42e193b6d38e *man/Rmalschains-package.Rd
-450579c2074063ea94706e84d976c4fa *man/malschains.Rd
-3c8d3226b34aeca687fd94b16398a225 *man/malschains.control.Rd
+4c88482fce83b6a902fdbedcf1f2fbf0 *man/Rmalschains-package.Rd
+9bee18165e0ba602535cdd76d4a21131 *man/malschains.Rd
+f0e42abcb0e48f8a0821dab006b2a9d5 *man/malschains.control.Rd
 fee6d532d1cc55b1ed044c3610db3aab *man/print.malschains.Rd
 0c0e8da9d5c30727e7fd87ab49a4e1bb *src/ConfigFile.cc
 1fcd1971aa894c25ed4d1b9ccba7e054 *src/ConfigFile.h
@@ -65,7 +65,7 @@ b2465db9a05c38cdef22c3a6d27d87f9 *src/icross.h
 c735026b61ea869cbfb5076366f71e9d *src/ima.h
 2bee5142ffc5657e6e2d5a4fe86fc912 *src/imutation.h
 34e83fdb396e7d66a6314aba0ed8c4ff *src/includenew.h
-ed0a7ea000ad5dd61b5539cc06cbb5e4 *src/individual.cc
+7c1b8a337c317bfd24ec7d1ff519390a *src/individual.cc
 896c31da42e8c70efcf6be4598b779e1 *src/individual.h
 ba7883c5201ea42110e3e981b4e72575 *src/initind.cc
 e1c474a1e396d52c8d4e95c633b72fad *src/initind.h
@@ -167,7 +167,7 @@ ccabe402d6c493c4c01fbdccb3cc596c *src/running.h
 4cbb949d97c4af5fb7985893a01a56bd *src/selectlsimp.h
 959bbbde23d2e7729699ed7956611f0b *src/signal.cc
 c59aaddbe4d647ba7da9ddab7dce190e *src/signal.h
-dec1b103a4c9200be0a52115f7f6acd1 *src/simplex.cc
+03a73837d968bbbb9be75cfabfdd9461 *src/simplex.cc
 1cb8249b9af612cb5a03cf03ecc20ecf *src/simplex.h
 c07fec370c9b84e3bbbb9cbc5bc043d4 *src/solis.cc
 b9ba2aa3779a46673d3d886baaf7d703 *src/solis.h

@@ -59,8 +59,10 @@ public:
 /**
  * Let sort a vector index in function of an indicated vector (passed by the constructor)
  */
+ 
+ // : binary_function<int,int,bool> removing inheritance to fix warning on CRAN, 26/3/2022
 template<class T>
-class SortIndex : binary_function<int,int,bool>{
+class SortIndex {
 public:
     T* m_values;
 
