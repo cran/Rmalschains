@@ -1,3 +1,11 @@
+8/10/2022 version 0.2-8:
+
+fixing more compiler warnings:
+
+- removed UTF-8 characters from comments
+- fixed an error in sade.cc, where function was taking ints when it should be doubles
+- fixed "address of stack memory associated with local variable 'output' returned" warnings
+
 26/3/2022 version 0.2-7:
 
 - removed unary_function and binary_function, which are deprecated

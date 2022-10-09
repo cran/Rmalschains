@@ -32,30 +32,30 @@ using namespace std;
  *
  * @class Config 
  *
- * Esta clase permite leer un fichero de configucación de la aplicación.
+ * Esta clase permite leer un fichero de configucaci\'on de la aplicaci\'on.
  *
  * El modelo que admite es el siguiente:
  *
- * En un fichero de configuración se especifique los distintos
- * parámetros para cada uno de las estrategias del AG. 
+ * En un fichero de configuraci\'on se especifique los distintos
+ * par\'ametros para cada uno de las estrategias del AG. 
  *
- * Se considera estrategia a cada uno de los métodos de cruce, 
- * de selección o de reemplazo a aplicar.
+ * Se considera estrategia a cada uno de los m\'etodos de cruce, 
+ * de selecci\'on o de reemplazo a aplicar.
  *
- * Se considera <type> de una estrategia no sólo a un tipo de estrategia
- * (como oeprador de cruce BLX o alpha) sino también al conjunto de parámetros.
+ * Se considera <type> de una estrategia no s\'olo a un tipo de estrategia
+ * (como oeprador de cruce BLX o alpha) sino tambi\'en al conjunto de par\'ametros.
  *
  * La idea es poder asociar el mismo identificador de estrategia con distintos
- * conjuntos de parámetros, cada uno identificado con un nombre distintivo. 
+ * conjuntos de par\'ametros, cada uno identificado con un nombre distintivo. 
  *
  * De esa forma, simplemente indicando el tipo de la estrategia a aplicar
- * se seleccionaría el total de parámetros. 
+ * se seleccionar\'ia el total de par\'ametros. 
  *
  * formato:
  * <typeestrategia>.<type>.id = <name>
  *
- * Para asociar a este <type> los distintos parámetros la sintaxis es la 
- * siguiente (se supone que el objeto factory asociado identificará
+ * Para asociar a este <type> los distintos par\'ametros la sintaxis es la 
+ * siguiente (se supone que el objeto factory asociado identificar\'a
  * la distinta ). 
  * 
  * <typeestrategia>.<type>.<param1> = <value1>
@@ -64,23 +64,23 @@ using namespace std;
  * o bien mediante un fichero externo
  * <typeestrategia>.<type>.params = <filename>
  *
- * <filename> en este caso contendría la sintaxis
+ * <filename> en este caso contendr\'ia la sintaxis
  * <param1> = <value1>
  * <param2> = <value2>
  * .
  * .
  * .
  * 
- * Se puede especificar parámetros comunes a los distintos tipos asociados
+ * Se puede especificar par\'ametros comunes a los distintos tipos asociados
  * a una estrategia con la sintaxis. 
  * <typeestrategia>.<name>.<param1> = <value1>
  *
- * Dado que la idea de esta sintaxis es especificar parámetros comunes
- * tendrá preferencia la sintaxis <typeestrategia>.<type>.<paran> sobre
- * ésta. 
+ * Dado que la idea de esta sintaxis es especificar par\'ametros comunes
+ * tendr\'a preferencia la sintaxis <typeestrategia>.<type>.<paran> sobre
+ * \'esta. 
  * 
- * La elección de la estrategia (el identificador <type>) 
- * a aplicar se puede especificar mediante paso de parámetros
+ * La elecci\'on de la estrategia (el identificador <type>) 
+ * a aplicar se puede especificar mediante paso de par\'ametros
  * o bien mediante un valor default:
  *
  * <typeestrategia>.<default> = <type>
@@ -105,9 +105,9 @@ private:
 
     /**
      * Permite obtener el nombre de la estrategia elegida.
-     * Si no existe lanza una excepción (type_not_valide)
+     * Si no existe lanza una excepci\'on (type_not_valide)
      * 
-     * @return El nombre de la estrategia elegia ('' si todavía
+     * @return El nombre de la estrategia elegia ('' si todav\'ia
      * no existe ninguna elegida). 
      */
     string extractName(void);
@@ -118,16 +118,21 @@ public:
      * @class config_error
      *
      * Esta clase es lanzada cuando se produce un error en la lectura del fichero
-     * de configuración
+     * de configuraci\'on
      */
     struct config_error : public std::exception{
        string m_msg;
        string m_strategy;
+       string m_output;
+       
        config_error( const string& strategy, const string& msg)
 	 : m_msg(msg), m_strategy(strategy) {} 
-       virtual const char* what() const throw() {
-	  string output = "Config Error: " +m_msg;
-	  return output.c_str();
+       virtual const char* what() throw() {
+	  //m_msg.insert(0, "Config Error: ");
+	  //return m_msg.c_str();
+	  	  
+  	  m_output = "Config Error: " +m_msg;
+	  return m_output.c_str();
        }
 
        virtual ~config_error() throw() {}
@@ -147,7 +152,7 @@ public:
 
     /**
      * Constructor
-     * @param config Fichero de configuración
+     * @param config Fichero de configuraci\'on
      */
     Config(string strategy, ConfigFile &config) : fileconfig(config) {
        print_info("Creando fileconfig");
@@ -208,9 +213,9 @@ public:
 
 
     /**
-     * Obtengo el parámetro asociado
+     * Obtengo el par\'ametro asociado
      *
-     * @param param el nombre del parámetro
+     * @param param el nombre del par\'ametro
      * @return Valor en forma de cadena
      */
     template <class T>

@@ -1,5 +1,5 @@
-fb870a859cf071a115fd7351e9bc21bc *ChangeLog
-dcb18202097a437b6796e484f3ef4601 *DESCRIPTION
+7440b066f63d979e0d4f37db58f22487 *ChangeLog
+b6d1da43c9377ba7f221c9b439f91875 *DESCRIPTION
 da2d092bcef8a05ed9d7c4b066a44c31 *LICENSE
 62d40f01a965d961d4573fadf652dd9d *NAMESPACE
 11eb87837ce4d496fbd5e14771d70b56 *R/Rmalschains-package.R
@@ -16,7 +16,7 @@ e9b580a350e1b196684d3926a4452cb7 *demo/rastrigin_highDim.R
 f0e42abcb0e48f8a0821dab006b2a9d5 *man/malschains.control.Rd
 fee6d532d1cc55b1ed044c3610db3aab *man/print.malschains.Rd
 0c0e8da9d5c30727e7fd87ab49a4e1bb *src/ConfigFile.cc
-1fcd1971aa894c25ed4d1b9ccba7e054 *src/ConfigFile.h
+40a05689717cd95120f88952675d7857 *src/ConfigFile.h
 1435db163bbf2f4c633aad238c361d50 *src/Makevars
 028241e83236ba85d9e114d20ade5d52 *src/Makevars.win
 a6b6c0e6184115f70e02db6f4c54550f *src/RmalschainsEvaluate.h
@@ -34,7 +34,7 @@ daa96ed286efae89112a417d151c5f8d *src/cmaesb.h
 1a229d019e01ea41140c933a14d3f37d *src/cmaeshan.cc
 1341246dfff3e901fd4ea20172dc528a *src/cmaeshan.h
 f03f56cb107df914594d7aa31ec9d542 *src/config.cc
-71b35093fb7e9b8f96cc9d166ef4a9fe *src/config.h
+07aa44aa4f305be99d00e68fd89f7417 *src/config.h
 0774f951b756bfe453f38b6f8c839af6 *src/controlw.h
 cab88548241c99f3dd0f3f8b4766afc6 *src/cross.cc
 87c7382464c4653daaa13799331ee4ef *src/cross.h
@@ -118,7 +118,7 @@ ebfc5a3e2477e4453ace3a6a9792e952 *src/newmatio.h
 eafbd5e3a9751af4ee47edbc6772d822 *src/newmatrm.cpp
 dd358f093608aa948207bb53576a973c *src/newmatrm.h
 1eed12f81b8c1da86fea23c30c5a75d5 *src/newutil.cc
-e213ebe08e7a01efbe5a4747108d3dd2 *src/newutil.h
+ae0de9ed1a9a3f7446d609541594b30e *src/newutil.h
 eea005c9abd5bcdda30f91ff87a6df84 *src/nm_misc.cpp
 2631924838feca1191f66fc6c7076a7e *src/orandom.cc
 654aee31e87aaac7c28150bbaddc26e1 *src/orandom.h
@@ -141,7 +141,7 @@ fe2ac66d8f6248d974792bf8d8cba062 *src/populationpso.cc
 ec730badc8dfaf078eb88fbc80fd4494 *src/populationreal.h
 528bde013d8236338834eb0543bab4d6 *src/precisio.h
 a5ee5136c6fa08bebe533b7d51eec09a *src/problem.cc
-b9b699e54daee7f8f2dfa696d100c859 *src/problem.h
+ff7e35717db324b52dce5bc97a85f913 *src/problem.h
 49ca674e8d71fe81d3f378374650235d *src/problemfactory.h
 823f69af8d7a33ef53772cece7b4a27a *src/pso.cc
 f01e11f47572d7ead96c0c1e8017a952 *src/pso.h
@@ -156,7 +156,7 @@ ea01e9d1dd93019f199a2672e6b2316e *src/replace.h
 a485cf47bca5667ef71c9f8e4eecd93c *src/restart.h
 c3730aa138569f2e010d5bec5beb9460 *src/running.cc
 ccabe402d6c493c4c01fbdccb3cc596c *src/running.h
-4380a396e80a365e28ddb4889379ca87 *src/sade.cc
+98198c0011186c7851732de39f92f12e *src/sade.cc
 5305540e7985686839ff6687bf2e83a7 *src/sade.h
 0cf67a337d5a9d0e4fd736fad0314187 *src/sadeaf.cc
 1e1aba7045d109dc2a3044e9bf961077 *src/sadeaf.h

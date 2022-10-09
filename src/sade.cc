@@ -43,7 +43,7 @@ void SADE::setDebug(void) {
 SADE::~SADE(void) {
 }
 
-static double minValues(int value1, int value2, int value3) {
+static double minValues(double value1, double value2, double value3) {
     if (value1 <= value2) {
         return (value1 <= value3 ? value1 : value3);
     }

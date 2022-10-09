@@ -92,7 +92,7 @@ Real median(const ColumnVector &mat);
 Real median(const RowVector &mat); 
 
 /**
- * Permite aplicar una división elemento a elemento de do vectores columnas
+ * Permite aplicar una divisi\'on elemento a elemento de do vectores columnas
  */
 MyReturnMatrix DivVectors(ColumnVector &A, const ColumnVector &B);
 

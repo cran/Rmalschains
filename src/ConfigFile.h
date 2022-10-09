@@ -62,7 +62,7 @@
 // Modified file_not_found and key_not_found, now they are 
 // compatibles with std::exception
 //
-// Cambiado trim para que sea público
+// Cambiado trim para que sea p\'ublico
 
 #ifndef CONFIGFILE_H
 #define CONFIGFILE_H
@@ -137,12 +137,14 @@ public:
 	 * Esta clase permite indicar que el fichero indicado no existe
 	 */
 	struct file_not_found : public std::exception{
-		string filename;
+		string m_filename;
+		string m_output;
+		
 		file_not_found( const string& filename_ = string() )
-			: filename(filename_) {} 
-		virtual const char* what() const throw() {
-		    string output = "Error: file '" +filename +"' not found";
-		    return output.c_str();
+			: m_filename(filename_) {} 
+		virtual const char* what() throw() {
+		    m_output = "Error: file '" +m_filename +"' not found";
+		    return m_output.c_str();
 		}
 
 		virtual ~file_not_found() throw() {}
@@ -150,12 +152,13 @@ public:
 	};
 
 	struct key_not_found : public std::exception{  // thrown only by T read(key) variant of read()
-	   string key;
+	   string m_key;
+    	   string m_output;
 	   key_not_found( const string& key_ = string() )
-	     : key(key_) {} 
-	   virtual const char* what() const throw () {
-	      string output = "The key '" +key +"' not found";
-	      return output.c_str();
+	     : m_key(key_) {} 
+	   virtual const char* what() throw () {
+	      m_output = "The key '" +m_key;// +"' not found";
+	      return m_output.c_str();
 	   }
 
 	   virtual ~key_not_found() throw(){}
