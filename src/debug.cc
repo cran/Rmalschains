@@ -103,7 +103,7 @@ void open_output_convergence(int num) {
       fconvergence = NULL;
    }
    else if (templatefname != "") {
-	sprintf(fname, "%s_%d.dat", templatefname.c_str(), num);
+	snprintf(fname, sizeof(fname), "%s_%d.dat", templatefname.c_str(), num);
 	fconvergence = fopen(fname, "w");
    }
 

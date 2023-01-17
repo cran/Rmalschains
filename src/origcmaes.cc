@@ -203,7 +203,7 @@ char *
 cmaes_SayHello(cmaes_t *t)
 {
   /* write initial message */
-  sprintf(t->sOutString, 
+  snprintf(t->sOutString, sizeof(t->sOutString),
 	  "(%d,%d)-CMA-ES(mu_eff=%.1f), Ver=\"%s\", dimension=%d, randomSeed=%d (%s)", 
 	  t->sp.mu, t->sp.lambda, t->sp.mueff, t->version, t->sp.N, 
 	  t->sp.seed, getTimeStr());
@@ -573,7 +573,7 @@ cmaes_ReSampleSingle( cmaes_t *t, int index)
   static char s[99];
 
   if (index < 0 || index >= t->sp.lambda) {
-    sprintf(s, "index==%d must be between 0 and %d", index, t->sp.lambda);
+    snprintf(s, sizeof(s), "index==%d must be between 0 and %d", index, t->sp.lambda);
     FATAL("cmaes_ReSampleSingle(): Population member ",s,0,0);
   }
   rgx = t->rgrgx[index];
@@ -1352,7 +1352,7 @@ cmaes_TestForTermination( cmaes_t *t)
       /* function value reached */
       if ((t->gen > 1 || t->state > 1) && t->sp.stStopFitness.flg && 
 	  t->rgFuncValue[t->index[0]] <= t->sp.stStopFitness.val) 
-	cp += sprintf(cp, "Fitness: function value %7.2e <= stopFitness (%7.2e)\n", 
+	cp += snprintf(cp, sizeof(sTestOutString), "Fitness: function value %7.2e <= stopFitness (%7.2e)\n", 
 		      t->rgFuncValue[t->index[0]], t->sp.stStopFitness.val);
       
       /* TolFun */
@@ -1362,7 +1362,7 @@ cmaes_TestForTermination( cmaes_t *t)
 	       rgdouMin(t->rgFuncValue, t->sp.lambda));
       
       if (t->gen > 0 && range <= t->sp.stopTolFun) {
-	cp += sprintf(cp, 
+	cp += snprintf(cp, sizeof(sTestOutString), 
 		      "TolFun: function value differences %7.2e < stopTolFun=%7.2e\n", 
 		      range, t->sp.stopTolFun);
       }
@@ -1372,7 +1372,7 @@ cmaes_TestForTermination( cmaes_t *t)
 	range = rgdouMax(t->arFuncValueHist, (int)*(t->arFuncValueHist-1)) 
 	  - rgdouMin(t->arFuncValueHist, (int)*(t->arFuncValueHist-1));
 	if (range <= t->sp.stopTolFunHist)
-	  cp += sprintf(cp, 
+	  cp += snprintf(cp, sizeof(sTestOutString), 
 			"TolFunHist: history of function value changes %7.2e stopTolFunHist=%7.2e", 
 			range, t->sp.stopTolFunHist);
       }
@@ -1383,7 +1383,7 @@ cmaes_TestForTermination( cmaes_t *t)
 	cTemp += (t->sigma * t->rgpc[i] < t->sp.stopTolX) ? 1 : 0;
       }
       if (cTemp == 2*N) {
-	cp += sprintf(cp, 
+	cp += snprintf(cp, sizeof(sTestOutString), 
 		      "TolX: object variable changes below %7.2e \n", 
 		      t->sp.stopTolX);
       }
@@ -1394,14 +1394,14 @@ cmaes_TestForTermination( cmaes_t *t)
 	  break;
       }
       if (i < N) {
-	cp += sprintf(cp, 
+	cp += snprintf(cp, sizeof(sTestOutString), 
 		      "TolUpX: standard deviation increased by more than %7.2e, larger initial standard deviation recommended \n", 
 		      t->sp.stopTolUpXFactor);
       }
 
       /* Condition of C greater than dMaxSignifKond */
       if (t->maxEW >= t->minEW * t->dMaxSignifKond) {
-	cp += sprintf(cp, 
+	cp += snprintf(cp, sizeof(sTestOutString), 
 		      "ConditionNumber: maximal condition number %7.2e reached. maxEW=%7.2e,minEW=%7.2e,maxdiagC=%7.2e,mindiagC=%7.2e\n", 
 		      t->dMaxSignifKond, t->maxEW, t->minEW, t->maxdiagC, t->mindiagC);
       } /* if */
@@ -1418,7 +1418,7 @@ cmaes_TestForTermination( cmaes_t *t)
 	  if (iKoo == N)	
 	    {
 	      /* t->sigma *= exp(0.2+t->sp.cs/t->sp.damps); */
-	      cp += sprintf(cp, 
+	      cp += snprintf(cp, sizeof(sTestOutString), 
 			    "NoEffectAxis: standard deviation 0.1*%7.2e in principal axis %d without effect\n", 
 			    fac/0.1, iAchse);
 	      break;
@@ -1433,7 +1433,7 @@ cmaes_TestForTermination( cmaes_t *t)
 	    {
 	      /* t->C[iKoo][iKoo] *= (1 + t->sp.ccov); */
 	      /* flg = 1; */
-	      cp += sprintf(cp, 
+	      cp += snprintf(cp, sizeof(sTestOutString), 
 			    "NoEffectCoordinate: standard deviation 0.2*%7.2e in coordinate %d without effect\n", 
 			    t->sigma*sqrt(t->C[iKoo][iKoo]), iKoo); 
 	      break;
@@ -1443,14 +1443,14 @@ cmaes_TestForTermination( cmaes_t *t)
       /* if (flg) t->sigma *= exp(0.05+t->sp.cs/t->sp.damps); */
 
       if(t->countevals >= t->sp.stopMaxFunEvals) 
-	cp += sprintf(cp, "MaxFunEvals: conducted function evaluations %.0f >= %g\n", 
+	cp += snprintf(cp, sizeof(sTestOutString), "MaxFunEvals: conducted function evaluations %.0f >= %g\n", 
 		      t->countevals, t->sp.stopMaxFunEvals);
 
 //      if(t->gen >= t->sp.stopMaxIter) 
-//	cp += sprintf(cp, "MaxIter: number of iterations %.0f >= %g\n", 
+//	cp += snprintf(cp, sizeof(sTestOutString), "MaxIter: number of iterations %.0f >= %g\n", 
 //		      t->gen, t->sp.stopMaxIter); 
       if(t->flgStop)
-	cp += sprintf(cp, "Manual: stop signal read\n");
+	cp += snprintf(cp, sizeof(sTestOutString), "Manual: stop signal read\n");
 
 #if 0
   else if (0) {
@@ -1669,14 +1669,14 @@ Check_Eigen( int N,  double **C, double *diag, double **Q)
       /* check here, is the normalization the right one? */
       if (fabs(cc - C[i>j?i:j][i>j?j:i])/sqrt(C[i][i]*C[j][j]) > 1e-10 
 	  && fabs(cc - C[i>j?i:j][i>j?j:i]) > 3e-14) {
-	sprintf(s, "%d %d: %.17e %.17e, %e", 
+	snprintf(s, sizeof(s), "%d %d: %.17e %.17e, %e", 
 		i, j, cc, C[i>j?i:j][i>j?j:i], cc-C[i>j?i:j][i>j?j:i]);
 	ERRORMESSAGE("cmaes_t:Eigen(): imprecise result detected ", 
 		     s, 0, 0);
 	++res; 
       }
       if (fabs(dd - (i==j)) > 1e-10) {
-	sprintf(s, "%d %d %.17e ", i, j, dd);
+	snprintf(s, sizeof(s), "%d %d %.17e ", i, j, dd);
 	ERRORMESSAGE("cmaes_t:Eigen(): imprecise result detected (Q not orthog.)", 
 		     s, 0, 0);
 	++res;
@@ -2767,7 +2767,7 @@ static void * new_void(int n, size_t size)
   static char s[70];
   void *p = calloc((unsigned) n, size);
   if (p == NULL) {
-    sprintf(s, "new_void(): calloc(%ld,%ld) failed",(long)n,(long)size);
+    snprintf(s, sizeof(s), "new_void(): calloc(%ld,%ld) failed",(long)n,(long)size);
     FATAL(s,0,0,0);
   }
   return p;
@@ -2784,7 +2784,7 @@ static double * new_double(int n)
   static char s[170];
   double *p = (double *) calloc((unsigned) n, sizeof(double));
   if (p == NULL) {
-    sprintf(s, "new_double(): calloc(%ld,%ld) failed",
+    snprintf(s, sizeof(s), "new_double(): calloc(%ld,%ld) failed",
 	    (long)n,(long)sizeof(double));
     FATAL(s,0,0,0);
   }
@@ -2826,7 +2826,7 @@ void ERRORMESSAGE( char const *s1, char const *s2,
 {
 #if 0
   /*  static char szBuf[700];  desirable but needs additional input argument 
-      sprintf(szBuf, "%f:%f", gen, gen*lambda);
+      snprintf(szBuf, sizeof(szBuf), "%f:%f", gen, gen*lambda);
   */
   time_t t = time(NULL);
   FILE *fp = fopen( "errcmaes.err", "a");

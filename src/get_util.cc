@@ -172,69 +172,53 @@ IEA *get_EA(string alg, Random &random) {
 	   de->setF(f);
 	   de->setCR(cr);
 	   char val[50];
-           sprintf(val, "DE with F=%.1f and CR=%.1f", f, cr);
+           snprintf(val, sizeof(val), "DE with F=%.1f and CR=%.1f", f, cr);
 	   print_str += val;
 	   delete cross;
 	   ea = de;
 	}
         else if (alg == "jde") {
            JDE *de = new JDE(&random, 0);
-	   char val[50];
-	   sprintf(val, "JDE : not dynamic");
-	   print_str += val;
+	   print_str += "JDE : not dynamic";
 	   ea = de;
 	}
         else if (alg == "jdebin") {
            JDEBin *de = new JDEBin(&random, 0);
-	   char val[50];
-	   sprintf(val, "JDEBin : not dynamic");
-	   print_str += val;
+	   print_str += "JDEBin : not dynamic";
 	   ea = de;
 	}
         else if (alg == "jdeexp") {
            JDEBin *de = new JDEBin(&random, 0);
-	   char val[50];
 	   de->setStrategy("jDEexp");
-	   sprintf(val, "JDEExp : not dynamic");
-	   print_str += val;
+	   print_str += "JDEExp : not dynamic";
 	   ea = de;
 	}
 
 	else if (alg == "jdemc") {
            JDEMC *de = new JDEMC(&random, 0);
-	   char val[50];
-	   sprintf(val, "JDEMC : not dynamic");
-	   print_str += val;
+	   print_str += "JDEMC : not dynamic";
 	   ea = de;
 	}
 	else if (alg == "jderand") {
            JDERand *de = new JDERand(&random, 0);
-	   char val[50];
-	   sprintf(val, "JDERand : not dynamic");
-	   print_str += val;
+	   print_str += "JDERand : not dynamic";
 	   ea = de;
 	}
 	else if (alg == "jdemcinfo") {
            JDEMC *de = new JDEMC(&random, 0);
 	   de->setDebug();
-	   char val[50];
-	   sprintf(val, "JDEMC : not dynamic");
-	   print_str += val;
+	   print_str += "JDEMC : not dynamic";
 	   ea = de;
 	}
         else if (alg == "sade") {
            SADE *de = new SADE(&random);
-           char val[50];
-	   sprintf(val, "SaDE: averageF: 0.5");
-	   print_str += val;
+	   print_str += "SaDE: averageF: 0.5";
            ea = de;
         }
         else if (alg == "sadeaf") {
            SADEAF *sadeaf = new SADEAF(&random);
            sadeaf->setAverageF(0.5);
-           char val[50];
-	   sprintf(val, "SaDEAF: averageF: 0.5");
-	   print_str += val;
+	   print_str += "SaDEAF: averageF: 0.5";
            ea = sadeaf;
         }
 	else if (alg.find("sadeF")==0) {
@@ -242,7 +226,7 @@ IEA *get_EA(string alg, Random &random) {
            double averageF = atof(alg.substr(5).c_str());
  	   de->setAverageF(averageF);
            char val[50];
-           sprintf(val, "SaDE\taverageF: %f", averageF);
+           snprintf(val, sizeof(val), "SaDE\taverageF: %f", averageF);
 	   print_str += val;
            ea = de;
         }

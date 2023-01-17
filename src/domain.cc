@@ -34,7 +34,7 @@ DomainReal::DomainReal(unsigned int dim) : m_mins(dim), m_maxs(dim), m_dim(dim),
 void DomainReal::checkGen(unsigned int gen) {
     if (gen >= m_dim) {
         char msg[100];
-	sprintf(msg, "position %d is not valide for a gen", gen);
+	snprintf(msg, sizeof(msg), "position %d is not valid for a gen", gen);
 	throw new string(msg);
     }
  
