@@ -124,7 +124,7 @@
 #'                        maxEvals=50000, control=malschains.control(popsize=50, 
 #'                        istep=300, ls="cmaes", optimum=-5))
 #' 
-#' \dontrun{
+#' \donttest{
 #' #use only the CMA-ES local search               
 #' res.claw2 <- malschains(function(x) {-claw(x)}, lower=c(-3), upper=c(3), verbosity=0,
 #'                        maxEvals=50000, control=malschains.control(ls="cmaes", 

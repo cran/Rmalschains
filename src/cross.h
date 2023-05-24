@@ -126,9 +126,9 @@ class CrossDim : public ICrossBinary {
    private:
     double m_alpha;
     double m_pr;
-    unsigned ndim;
-    double m_dim_ini;
-    double m_dim_fin;
+    //unsigned ndim;
+    //double m_dim_ini;
+    //double m_dim_fin;
 };
 
 

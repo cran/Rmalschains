@@ -127,7 +127,7 @@ class RatioLocalSearchManager : public NewIndividualLocalSearchManager {
         double m_ratio; /**< Ratio of new individuals to be improved */
 
  	unsigned m_intensity; /** Intensity of each LS */
-	bool m_configured; 
+	//bool m_configured; 
 };
 
 }}

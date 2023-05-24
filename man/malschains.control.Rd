@@ -47,6 +47,9 @@ too low (zero), then the local search will usually always try to improve on the 
 
 \item{lsParam2}{Second (optional) parameter. Currently, if local search is cmaes, this is the parameter parentssize/mu of cmaes. If it is not set, not positive, or not smaller lambda, cmaes will calculate this automatically using a heuristic.}
 }
+\value{
+returns a list with the parameter names and values of the supplied parameters.
+}
 \description{
 This is a function that initializes and sets the parameters of the algorithm. 
 It generates a list of parameters, to be used with the \code{\link{malschains}} function.

@@ -1,3 +1,9 @@
+10/5/2023 version 0.2-10:
+
+- some more snprintf fixes, to fix buffer overflows
+- yet another round of compiler warning fixes
+- fixed some documentation things to apply to some of the new CRAN policies
+
 16/1/2023 version 0.2-9:
 
 - replacing sprintf with snprintf

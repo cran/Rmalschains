@@ -1344,15 +1344,15 @@ cmaes_TestForTermination( cmaes_t *t)
 {
   double range, fac;
   int iAchse, iKoo;
-  static char sTestOutString[3024];
+  static char sTestOutString[10000];
   char * cp = sTestOutString;
   int i, cTemp, N=t->sp.N; 
   cp[0] = '\0';
-
+  
       /* function value reached */
       if ((t->gen > 1 || t->state > 1) && t->sp.stStopFitness.flg && 
 	  t->rgFuncValue[t->index[0]] <= t->sp.stStopFitness.val) 
-	cp += snprintf(cp, sizeof(sTestOutString), "Fitness: function value %7.2e <= stopFitness (%7.2e)\n", 
+	cp += snprintf(cp, sizeof(sTestOutString) - (cp - sTestOutString) - 1, "Fitness: function value %7.2e <= stopFitness (%7.2e)\n", 
 		      t->rgFuncValue[t->index[0]], t->sp.stStopFitness.val);
       
       /* TolFun */
@@ -1362,7 +1362,7 @@ cmaes_TestForTermination( cmaes_t *t)
 	       rgdouMin(t->rgFuncValue, t->sp.lambda));
       
       if (t->gen > 0 && range <= t->sp.stopTolFun) {
-	cp += snprintf(cp, sizeof(sTestOutString), 
+	cp += snprintf(cp, sizeof(sTestOutString) - (cp - sTestOutString) - 1, 
 		      "TolFun: function value differences %7.2e < stopTolFun=%7.2e\n", 
 		      range, t->sp.stopTolFun);
       }
@@ -1371,10 +1371,21 @@ cmaes_TestForTermination( cmaes_t *t)
       if (t->gen > *(t->arFuncValueHist-1)) {
 	range = rgdouMax(t->arFuncValueHist, (int)*(t->arFuncValueHist-1)) 
 	  - rgdouMin(t->arFuncValueHist, (int)*(t->arFuncValueHist-1));
-	if (range <= t->sp.stopTolFunHist)
-	  cp += snprintf(cp, sizeof(sTestOutString), 
+	if (range <= t->sp.stopTolFunHist) {
+
+		//printf("DEBUG_DEBUG_DEBUG %d : %d \n", sizeof(sTestOutString), (cp - sTestOutString));
+		//printf("-----CP X1----\n");
+		//printf("%s\n", cp);
+		
+	  cp += snprintf(cp, sizeof(sTestOutString) - (cp - sTestOutString) - 1, 
 			"TolFunHist: history of function value changes %7.2e stopTolFunHist=%7.2e", 
 			range, t->sp.stopTolFunHist);
+			
+		//printf("-----CP X2----\n");
+		//printf("%s\n", cp);
+		//printf("2222222DEBUG_DEBUG_DEBUG %d : %d \n", sizeof(sTestOutString), (cp - sTestOutString));
+	}
+						
       }
       
       /* TolX */
@@ -1383,7 +1394,7 @@ cmaes_TestForTermination( cmaes_t *t)
 	cTemp += (t->sigma * t->rgpc[i] < t->sp.stopTolX) ? 1 : 0;
       }
       if (cTemp == 2*N) {
-	cp += snprintf(cp, sizeof(sTestOutString), 
+	cp += snprintf(cp, sizeof(sTestOutString) - (cp - sTestOutString) - 1, 
 		      "TolX: object variable changes below %7.2e \n", 
 		      t->sp.stopTolX);
       }
@@ -1394,14 +1405,14 @@ cmaes_TestForTermination( cmaes_t *t)
 	  break;
       }
       if (i < N) {
-	cp += snprintf(cp, sizeof(sTestOutString), 
+	cp += snprintf(cp, sizeof(sTestOutString) - (cp - sTestOutString) - 1, 
 		      "TolUpX: standard deviation increased by more than %7.2e, larger initial standard deviation recommended \n", 
 		      t->sp.stopTolUpXFactor);
       }
 
       /* Condition of C greater than dMaxSignifKond */
       if (t->maxEW >= t->minEW * t->dMaxSignifKond) {
-	cp += snprintf(cp, sizeof(sTestOutString), 
+	cp += snprintf(cp, sizeof(sTestOutString) - (cp - sTestOutString) - 1, 
 		      "ConditionNumber: maximal condition number %7.2e reached. maxEW=%7.2e,minEW=%7.2e,maxdiagC=%7.2e,mindiagC=%7.2e\n", 
 		      t->dMaxSignifKond, t->maxEW, t->minEW, t->maxdiagC, t->mindiagC);
       } /* if */
@@ -1418,7 +1429,7 @@ cmaes_TestForTermination( cmaes_t *t)
 	  if (iKoo == N)	
 	    {
 	      /* t->sigma *= exp(0.2+t->sp.cs/t->sp.damps); */
-	      cp += snprintf(cp, sizeof(sTestOutString), 
+	      cp += snprintf(cp, sizeof(sTestOutString) - (cp - sTestOutString) - 1, 
 			    "NoEffectAxis: standard deviation 0.1*%7.2e in principal axis %d without effect\n", 
 			    fac/0.1, iAchse);
 	      break;
@@ -1433,7 +1444,7 @@ cmaes_TestForTermination( cmaes_t *t)
 	    {
 	      /* t->C[iKoo][iKoo] *= (1 + t->sp.ccov); */
 	      /* flg = 1; */
-	      cp += snprintf(cp, sizeof(sTestOutString), 
+	      cp += snprintf(cp, sizeof(sTestOutString) - (cp - sTestOutString) - 1, 
 			    "NoEffectCoordinate: standard deviation 0.2*%7.2e in coordinate %d without effect\n", 
 			    t->sigma*sqrt(t->C[iKoo][iKoo]), iKoo); 
 	      break;
@@ -1443,14 +1454,14 @@ cmaes_TestForTermination( cmaes_t *t)
       /* if (flg) t->sigma *= exp(0.05+t->sp.cs/t->sp.damps); */
 
       if(t->countevals >= t->sp.stopMaxFunEvals) 
-	cp += snprintf(cp, sizeof(sTestOutString), "MaxFunEvals: conducted function evaluations %.0f >= %g\n", 
+	cp += snprintf(cp, sizeof(sTestOutString) - (cp - sTestOutString) - 1, "MaxFunEvals: conducted function evaluations %.0f >= %g\n", 
 		      t->countevals, t->sp.stopMaxFunEvals);
 
 //      if(t->gen >= t->sp.stopMaxIter) 
-//	cp += snprintf(cp, sizeof(sTestOutString), "MaxIter: number of iterations %.0f >= %g\n", 
+//	cp += snprintf(cp, sizeof(sTestOutString) - (cp - sTestOutString) - 1, "MaxIter: number of iterations %.0f >= %g\n", 
 //		      t->gen, t->sp.stopMaxIter); 
       if(t->flgStop)
-	cp += snprintf(cp, sizeof(sTestOutString), "Manual: stop signal read\n");
+	cp += snprintf(cp, sizeof(sTestOutString) - (cp - sTestOutString) - 1, "Manual: stop signal read\n");
 
 #if 0
   else if (0) {

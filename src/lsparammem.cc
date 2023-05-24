@@ -31,7 +31,7 @@ void LSParametersMemory::store(unsigned id, ILSParameters *params) {
 }
 
 ILSParameters *LSParametersMemory::recover(unsigned id) {
-	 LSMemory::iterator pos;
+	 //LSMemory::iterator pos;
 
 	 if (id > m_params.size()) {
 		  throw ConfigException("ILSParameters::recover"); 

@@ -71,7 +71,7 @@ private:
      */
     void cross(unsigned mom, unsigned dad, tChromosomeReal &crom);
 
-    unsigned m_initEval;
+    //unsigned m_initEval;
     int m_pmut;
 
     ISelect *m_select;

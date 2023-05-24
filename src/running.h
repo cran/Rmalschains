@@ -126,7 +126,9 @@ public:
     RunningException(string msg) : runtime_error(msg), m_msg(msg) {
     }
 
-    const char *what(void) {
+    using std::exception::what;
+		
+    const char* what() const throw() override {
 	return m_msg.c_str();
     }
 

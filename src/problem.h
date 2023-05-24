@@ -38,7 +38,7 @@ namespace realea {
 class ConfigException: public runtime_error {
 private:
 	string m_name;
-	string m_msg;
+	mutable string m_msg;
 
 public:
 	ConfigException(string name) : runtime_error(name) {
@@ -47,9 +47,11 @@ public:
 
 public:
 	virtual ~ConfigException(void) throw () { }
-	virtual const char *what(void) {
+	
+	using std::exception::what;
 		
-		m_msg = "Parameter Config " +m_name +" is not yet defined";
+	const char* what() const throw() override {
+		m_msg = "Parameter Config " + m_name + " is not yet defined";
 		return m_msg.c_str();
 	}
 };

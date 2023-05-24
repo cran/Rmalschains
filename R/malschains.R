@@ -22,6 +22,7 @@
 #' @param lsOnly Apply only the local search algorithm, and not MA-LS-Chains
 #' @param lsParam1 First (optional) parameter. Currently, if local search is cmaes, this is the parameter popsize/lambda of cmaes. If it is not set or not positive, cmaes will calculate this automatically using a heuristic.
 #' @param lsParam2 Second (optional) parameter. Currently, if local search is cmaes, this is the parameter parentssize/mu of cmaes. If it is not set, not positive, or not smaller lambda, cmaes will calculate this automatically using a heuristic.
+#' @return returns a list with the parameter names and values of the supplied parameters.
 #' @references 
 #' 
 #' Molina, D., Lozano, M., Sánchez, A.M., Herrera, F.
@@ -140,8 +141,9 @@ malschains <- function(fn, lower, upper, dim, maxEvals=10*control$istep, verbosi
 #' @title Generic print function for malschains results
 #' @param x the \code{\link{malschains}} result
 #' @param ... additional function parameters (currently not used)
+#' @return the original supplied \code{\link{malschains}} object is returned, as \code{invisible()}.
 #' @export
-#' @S3method print malschains
+# @S3method print malschains
 #' @method print malschains
 # @rdname malschains
 print.malschains <- function(x, ...) {

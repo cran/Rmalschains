@@ -52,7 +52,7 @@ class MTSLS2 : public IParallelLocalSearch {
     private:
 	double m_maxdelta;
 	double m_mindelta;
-	double m_ratio;
+	//double m_ratio;
 };
 
 }

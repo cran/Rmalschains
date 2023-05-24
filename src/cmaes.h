@@ -59,7 +59,11 @@ class CMAES : public ILocalSearch {
     private:
 	double m_rfactor;
 	double m_nfactor;
+	
+#if _PRINTDEBUG
 	bool m_debug;
+#endif
+	
 };
 
 }

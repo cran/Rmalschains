@@ -109,7 +109,11 @@ MyReturnMatrix randn(Random *m_random, int fil,int col) {
 
 
 
-CMAES::CMAES(void) : m_debug(false) {
+CMAES::CMAES(void) {
+
+#if _PRINTDEBUG
+	m_debug = false;
+#endif	
 	m_pop = NULL;
 	m_rfactor = 0;
 	m_nfactor = 0;

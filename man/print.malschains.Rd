@@ -11,6 +11,9 @@
 
 \item{...}{additional function parameters (currently not used)}
 }
+\value{
+the original supplied \code{\link{malschains}} object is returned, as \code{invisible()}.
+}
 \description{
 Print out some characteristics of a \code{\link{malschains}} result.
 The result shows besides the best solution and its fitness the total number of evaluations spent for both EA and LS, 

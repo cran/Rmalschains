@@ -138,12 +138,15 @@ public:
 	 */
 	struct file_not_found : public std::exception{
 		string m_filename;
-		string m_output;
+		mutable string m_output;
 		
 		file_not_found( const string& filename_ = string() )
 			: m_filename(filename_) {} 
-		virtual const char* what() throw() {
-		    m_output = "Error: file '" +m_filename +"' not found";
+			
+		using std::exception::what;
+		
+		const char* what() const throw() override {
+		    m_output = "Error: file '" + m_filename + "' not found";
 		    return m_output.c_str();
 		}
 
@@ -153,11 +156,14 @@ public:
 
 	struct key_not_found : public std::exception{  // thrown only by T read(key) variant of read()
 	   string m_key;
-    	   string m_output;
+    	   mutable string m_output;
 	   key_not_found( const string& key_ = string() )
 	     : m_key(key_) {} 
-	   virtual const char* what() throw () {
-	      m_output = "The key '" +m_key;// +"' not found";
+	     
+	   using std::exception::what;
+			
+           const char* what() const throw() override {
+	      m_output = "The key '" + m_key + "' not found";
 	      return m_output.c_str();
 	   }
 

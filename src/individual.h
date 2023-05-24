@@ -42,7 +42,10 @@ public:
 
 public:
 	virtual ~IndException(void) throw () { }
-	virtual const char *what(void) {
+	
+	using std::exception::what;
+		
+	const char* what() const throw() override {
 		return m_name.c_str();
 	}
 };

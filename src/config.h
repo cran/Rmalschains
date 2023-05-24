@@ -123,15 +123,18 @@ public:
     struct config_error : public std::exception{
        string m_msg;
        string m_strategy;
-       string m_output;
+       mutable string m_output;
        
        config_error( const string& strategy, const string& msg)
 	 : m_msg(msg), m_strategy(strategy) {} 
-       virtual const char* what() throw() {
+
+       using std::exception::what;
+		
+       const char* what() const throw() override {
 	  //m_msg.insert(0, "Config Error: ");
 	  //return m_msg.c_str();
 	  	  
-  	  m_output = "Config Error: " +m_msg;
+  	  m_output = "Config Error: " + m_msg;
 	  return m_output.c_str();
        }
 
